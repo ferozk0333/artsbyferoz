@@ -3,1380 +3,1642 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arts by Feroz — Bhopal, India</title>
+<title>Feroz Khan — Art Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/*──────────────────────────────────────────────────────────────
-  RESET & TOKENS
-──────────────────────────────────────────────────────────────*/
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#0d0b09;
-  --ink60:rgba(13,11,9,.6);
-  --ink20:rgba(13,11,9,.2);
-  --paper:#f4f0e8;
-  --paper80:rgba(244,240,232,.8);
-  --chalk:#faf8f3;
-  --rust:#c17a4a;
-  --rust-dk:#8a4f25;
-  --rust-lt:#f0d9c5;
-  --teal:#2d6b6b;
-  --border:rgba(13,11,9,.1);
-  --F:'Cormorant Garamond',Georgia,serif;
-  --S:'DM Sans',system-ui,sans-serif;
-}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--S);font-weight:300;overflow-x:hidden;cursor:none}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/*──────────────────────────────────────────────────────────────
-  CURSOR
-──────────────────────────────────────────────────────────────*/
-#C1,#C2{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
-#C1{width:9px;height:9px;background:var(--ink);transition:width .22s,height .22s,background .22s}
-#C2{width:36px;height:36px;border:1px solid var(--ink);opacity:.35;transition:width .28s,height .28s,border-color .28s,opacity .28s}
-body.H #C1{width:13px;height:13px;background:var(--rust)}
-body.H #C2{width:54px;height:54px;border-color:var(--rust);opacity:.18}
+  :root {
+    --ink: #2e1f0f;
+    --ink-soft: #f5ece0;
+    --cream: #2e1f0f;
+    --cream-dim: #7a5c3f;
+    --gold: #c4622d;
+    --gold-light: #e07a45;
+    --divider: rgba(46,31,15,0.1);
+    --divider-strong: rgba(46,31,15,0.2);
+    --bg: #fdf6ec;
+    --bg-card: #faf0e2;
+    --bg-warm: #f5e8d2;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  NAV
-──────────────────────────────────────────────────────────────*/
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 52px;height:64px;
-  background:var(--paper80);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  transition:background .3s;
-}
-.logo{font-family:var(--F);font-size:16px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;cursor:none}
-.nl{display:flex;gap:0;list-style:none}
-.nl a{
-  display:block;padding:0 16px;line-height:64px;
-  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--ink60);text-decoration:none;cursor:none;
-  transition:color .2s;position:relative;
-}
-.nl a::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:2px;background:var(--rust);transform:scaleX(0);transition:transform .25s}
-.nl a:hover{color:var(--ink)}
-.nl a.on{color:var(--ink)}
-.nl a.on::after{transform:scaleX(1)}
-#burger{display:none;background:none;border:none;cursor:none;flex-direction:column;gap:5px;padding:4px}
-#burger span{display:block;width:22px;height:1px;background:var(--ink);transition:.3s}
+  html { scroll-behavior: smooth; }
 
-/*──────────────────────────────────────────────────────────────
-  PAGES
-──────────────────────────────────────────────────────────────*/
-.pg{display:none;min-height:100vh;padding-top:64px}
-.pg.on{display:block}
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  HERO — full-bleed split with overlapping type
-──────────────────────────────────────────────────────────────*/
-.hero{
-  display:grid;grid-template-columns:55% 45%;
-  min-height:calc(100vh - 64px);
-  position:relative;overflow:hidden;
-}
-.hero-words{
-  position:relative;z-index:2;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:60px 64px 80px;
-}
-.tag{
-  display:inline-flex;align-items:center;gap:12px;
-  font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--rust);
-  margin-bottom:36px;
-}
-.tag::before{content:'';width:28px;height:1px;background:var(--rust)}
-.hero-h{
-  font-family:var(--F);
-  font-size:clamp(64px,7.5vw,118px);
-  font-weight:300;line-height:.88;letter-spacing:-.02em;
-  margin-bottom:0;
-}
-.hero-h em{font-style:italic;color:var(--rust-dk);display:block}
-.hero-accent-word{
-  font-family:var(--F);font-style:italic;font-size:clamp(18px,2vw,26px);
-  color:var(--ink60);margin:28px 0 36px;line-height:1.5;max-width:340px;
-}
-.hero-accent-word strong{font-style:normal;color:var(--ink);font-weight:600}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
-.hero-meta{
-  padding-top:36px;border-top:1px solid var(--border);
-  display:flex;gap:48px;
-}
-.hero-meta-item .n{font-family:var(--F);font-size:38px;font-weight:300;line-height:1}
-.hero-meta-item .l{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink60);margin-top:4px}
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    background: rgba(253,246,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--divider);
+  }
 
-.hero-canvas{
-  position:relative;background:var(--ink);overflow:hidden;
-}
-.hero-canvas img{
-  width:100%;height:100%;object-fit:cover;
-  opacity:.75;transform:scale(1.05);
-  transition:transform 8s ease,opacity .5s;
-}
-.hero-canvas:hover img{transform:scale(1);opacity:.85}
-.hero-canvas-label{
-  position:absolute;bottom:32px;right:32px;
-  font-family:var(--F);font-style:italic;font-size:12px;
-  color:rgba(244,240,232,.5);letter-spacing:.1em;
-  writing-mode:vertical-rl;transform:rotate(180deg);
-}
-.hero-scroll{
-  position:absolute;bottom:36px;left:64px;
-  display:flex;align-items:center;gap:10px;z-index:3;
-  font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink60);
-}
-.hs-line{width:1px;height:40px;background:currentColor;opacity:.5;
-  animation:hs 1.8s ease-in-out infinite;transform-origin:top}
-@keyframes hs{0%,100%{opacity:0;transform:scaleY(0)}30%{opacity:.5;transform:scaleY(1)}70%{opacity:.5;transform:scaleY(1);transform-origin:bottom}99%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    cursor: pointer;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  MARQUEE BAND
-──────────────────────────────────────────────────────────────*/
-.mband{background:var(--ink);padding:15px 0;overflow:hidden;white-space:nowrap;user-select:none}
-.mtrack{display:inline-block;animation:mt 32s linear infinite}
-.mtrack:hover{animation-play-state:paused}
-.mi{display:inline-block;font-family:var(--F);font-style:italic;font-size:19px;padding:0 36px;color:rgba(244,240,232,.55)}
-.md{display:inline-block;width:4px;height:4px;background:var(--rust);border-radius:50%;vertical-align:middle}
-@keyframes mt{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  BUTTONS
-──────────────────────────────────────────────────────────────*/
-.btn-dk{
-  display:inline-flex;align-items:center;gap:12px;
-  background:var(--ink);color:var(--paper);
-  font-family:var(--S);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  padding:15px 32px;text-decoration:none;cursor:none;border:none;
-  transition:background .3s,gap .3s;
-}
-.btn-dk:hover{background:var(--rust-dk);gap:20px}
-.btn-lt{
-  display:inline-flex;align-items:center;gap:12px;
-  background:transparent;color:var(--ink);
-  font-family:var(--S);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  padding:14px 30px;text-decoration:none;cursor:none;border:1px solid var(--ink);
-  transition:background .3s,color .3s,gap .3s;
-}
-.btn-lt:hover{background:var(--ink);color:var(--paper);gap:20px}
-.btn-rust{
-  display:inline-flex;align-items:center;gap:12px;
-  background:var(--rust);color:#fff;
-  font-family:var(--S);font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  padding:15px 32px;text-decoration:none;cursor:none;border:none;
-  transition:background .3s,gap .3s;
-}
-.btn-rust:hover{background:var(--rust-dk);gap:20px}
-.tlink{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--rust);text-decoration:none;cursor:none;
-  transition:gap .25s;
-}
-.tlink:hover{gap:14px}
-.tlink-inv{color:rgba(244,240,232,.5)}
-.tlink-inv:hover{color:var(--rust)}
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+    font-weight: 400;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  SECTION BASICS
-──────────────────────────────────────────────────────────────*/
-.S{padding:96px 64px}
-.S-dk{background:var(--ink);color:var(--paper)}
-.S-chalk{background:var(--chalk)}
-.S-rust{background:var(--rust-lt)}
-.sec-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px}
-.sec-t{font-family:var(--F);font-size:clamp(32px,3.8vw,56px);font-weight:300;line-height:1.05}
-.sec-t em{font-style:italic;color:var(--rust-dk)}
-.S-dk .sec-t em{color:var(--rust)}
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--ink); }
 
-/*──────────────────────────────────────────────────────────────
-  REVEAL ANIMATION
-──────────────────────────────────────────────────────────────*/
-.rv{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
-.rv.vis{opacity:1;transform:translateY(0)}
-.rv2{opacity:0;transform:translateY(20px);transition:opacity .65s .15s ease,transform .65s .15s ease}
-.rv2.vis{opacity:1;transform:translateY(0)}
-.rv3{opacity:0;transform:translateY(20px);transition:opacity .65s .3s ease,transform .65s .3s ease}
-.rv3.vis{opacity:1;transform:translateY(0)}
+  /* PAGES */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+  .page.active { display: block; }
 
-/*──────────────────────────────────────────────────────────────
-  EXHIBITION — asymmetric masonry
-──────────────────────────────────────────────────────────────*/
-.ex-intro{padding:72px 64px 0}
-.ex-intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:56px}
-.ex-filter{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:48px}
-.filter-btn{
-  background:none;border:none;cursor:none;
-  padding:10px 20px;font-family:var(--S);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink60);transition:color .2s;
-  border-bottom:2px solid transparent;margin-bottom:-1px;
-}
-.filter-btn.on{color:var(--ink);border-bottom-color:var(--rust)}
-.filter-btn:hover{color:var(--ink)}
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--divider);
+    padding: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 5rem;
+  }
 
-/* The gallery itself — CSS grid with named slots */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-auto-rows:140px;
-  gap:8px;
-  padding:0 64px 80px;
-}
-.art{
-  position:relative;overflow:hidden;background:#1a1511;cursor:none;
-}
-.art img{width:100%;height:100%;object-fit:cover;opacity:.8;transition:transform .55s ease,opacity .35s}
-.art:hover img{transform:scale(1.06);opacity:1}
-.art-ov{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(13,11,9,.9) 0%,rgba(13,11,9,.3) 45%,transparent 70%);
-  opacity:0;transition:opacity .35s;
-}
-.art:hover .art-ov{opacity:1}
-.art-body{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:24px 18px 18px;
-  transform:translateY(8px);opacity:0;transition:transform .35s,opacity .35s;
-}
-.art:hover .art-body{transform:translateY(0);opacity:1}
-.art-n{position:absolute;top:14px;right:14px;font-size:9px;letter-spacing:.18em;color:rgba(244,240,232,.28)}
-.art-t{font-family:var(--F);font-style:italic;font-size:18px;color:var(--paper);margin-bottom:4px;line-height:1.1}
-.art-s{font-size:10px;line-height:1.5;color:rgba(244,240,232,.5);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.art-m{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,240,232,.28);margin-top:6px}
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--cream-dim);
+  }
 
-/* grid layout — actual spans */
-.art:nth-child(1) {grid-column:1/6;  grid-row:1/4}
-.art:nth-child(2) {grid-column:6/9;  grid-row:1/3}
-.art:nth-child(3) {grid-column:9/13; grid-row:1/4}
-.art:nth-child(4) {grid-column:6/9;  grid-row:3/5}
-.art:nth-child(5) {grid-column:1/4;  grid-row:4/7}
-.art:nth-child(6) {grid-column:4/6;  grid-row:4/6}
-.art:nth-child(7) {grid-column:9/12; grid-row:4/7}
-.art:nth-child(8) {grid-column:12/13;grid-row:4/7}
-.art:nth-child(9) {grid-column:6/9;  grid-row:5/7}
-.art:nth-child(10){grid-column:4/6;  grid-row:6/7}
-.art:nth-child(11){grid-column:1/5;  grid-row:7/10}
-.art:nth-child(12){grid-column:5/9;  grid-row:7/9}
-.art:nth-child(13){grid-column:9/13; grid-row:7/10}
-.art:nth-child(14){grid-column:5/9;  grid-row:9/11}
-.art:nth-child(11){grid-column:1/5;  grid-row:7/10}
+  .footer-meta {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--cream-dim);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  EXCLUSIVE SERIES — cinematic cards
-──────────────────────────────────────────────────────────────*/
-.excl-hero{
-  position:relative;min-height:440px;overflow:hidden;
-  display:flex;align-items:flex-end;
-  padding:64px;
-  background:var(--ink);
-}
-.excl-hero-bg{position:absolute;inset:0}
-.excl-hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.35}
-.excl-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(13,11,9,.95) 40%,rgba(13,11,9,.3))}
-.excl-hero-words{position:relative;z-index:2;max-width:560px}
-.excl-hero-words .tag{color:var(--rust)}
-.excl-hero-words h1{font-family:var(--F);font-size:clamp(48px,5.5vw,84px);font-weight:300;line-height:.9;color:var(--paper);margin-bottom:20px}
-.excl-hero-words h1 em{font-style:italic;color:var(--rust)}
-.excl-hero-words p{font-size:14px;line-height:1.75;color:rgba(244,240,232,.55);max-width:420px}
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
 
-.excl-grid{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  gap:0;
-}
-.ec{
-  position:relative;overflow:hidden;cursor:none;
-  aspect-ratio:3/4;background:var(--ink);
-}
-.ec img{width:100%;height:100%;object-fit:cover;opacity:.6;transition:transform .6s,opacity .4s}
-.ec:hover img{transform:scale(1.06);opacity:.8}
-.ec::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,9,.92) 35%,rgba(13,11,9,.2) 70%,transparent)}
-.ec-body{position:absolute;bottom:0;left:0;right:0;padding:28px 24px 24px;z-index:2}
-.ec-num{font-size:9px;letter-spacing:.28em;color:var(--rust);margin-bottom:8px}
-.ec-t{font-family:var(--F);font-style:italic;font-size:22px;color:var(--paper);margin-bottom:8px;line-height:1.1}
-.ec-sub{font-size:10px;letter-spacing:.12em;color:rgba(244,240,232,.35);margin-bottom:16px}
-.ec-play{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--rust);text-decoration:none;cursor:none;
-  border-bottom:1px solid rgba(193,122,74,.3);padding-bottom:3px;
-  transition:gap .25s,border-color .25s;
-}
-.ec-play:hover{gap:14px;border-color:var(--rust)}
-.ec-featured{grid-column:1/3;aspect-ratio:auto;min-height:500px}
-.ec-featured .ec-t{font-size:32px}
+  .footer-links a {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.7;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .footer-links a:hover { opacity: 1; color: var(--ink); }
 
-/* Video modal */
-.vmodal{
-  display:none;position:fixed;inset:0;z-index:600;
-  background:rgba(13,11,9,.96);align-items:center;justify-content:center;
-}
-.vmodal.on{display:flex}
-.vmodal-inner{width:min(860px,94vw);position:relative}
-.vmodal-inner iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
-.vm-close{
-  position:absolute;top:-44px;right:0;background:none;border:none;cursor:none;
-  font-size:22px;color:rgba(244,240,232,.5);transition:color .2s;
-}
-.vm-close:hover{color:var(--paper)}
-.vm-title{
-  padding:20px 0 0;font-family:var(--F);font-style:italic;font-size:22px;color:var(--paper);
-}
+  /* BRIDGE */
+  .bridge {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--divider);
+  }
 
-/*──────────────────────────────────────────────────────────────
-  ABOUT
-──────────────────────────────────────────────────────────────*/
-.about-split{
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:90vh;
-}
-.about-sticky{position:sticky;top:64px;height:calc(100vh - 64px);overflow:hidden}
-.about-sticky img{width:100%;height:100%;object-fit:cover}
-.about-scroll{padding:80px 64px;display:flex;flex-direction:column;gap:60px}
-.about-block h3{font-family:var(--F);font-size:clamp(26px,3vw,40px);font-weight:300;line-height:1.15;margin-bottom:18px}
-.about-block h3 em{font-style:italic;color:var(--rust-dk)}
-.about-block p{font-size:14px;line-height:1.85;color:var(--ink60);margin-bottom:14px}
-.about-block blockquote{
-  margin:24px 0;padding:0 0 0 20px;
-  border-left:2px solid var(--rust);
-  font-family:var(--F);font-style:italic;font-size:20px;color:var(--ink);line-height:1.5;
-}
-.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:4px}
-.skill-cell{background:var(--chalk);padding:20px;border:none}
-.skill-cell h5{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
-.skill-cell p{font-size:13px;color:var(--ink60);line-height:1.6}
+  .bridge-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  REVIEWS — editorial pull quotes
-──────────────────────────────────────────────────────────────*/
-.reviews-hero{
-  padding:80px 64px 0;
-  display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:end;
-  margin-bottom:56px;
-}
-.rh-big{font-family:var(--F);font-size:clamp(42px,5.5vw,80px);font-weight:300;line-height:.95}
-.rh-big em{font-style:italic;color:var(--rust-dk)}
-.rh-sub{font-size:14px;line-height:1.7;color:var(--ink60)}
+  .bridge-link {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--gold);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s;
+  }
 
-.reviews-tape{
-  display:flex;flex-direction:column;gap:1px;
-}
-.rv-card{
-  display:grid;grid-template-columns:100px 1fr 80px;gap:32px;
-  align-items:center;padding:32px 64px;background:var(--chalk);
-  border-bottom:1px solid var(--border);
-  transition:background .25s;
-}
-.rv-card:hover{background:var(--rust-lt)}
-.rv-card:nth-child(even){background:var(--paper)}
-.rv-card:nth-child(even):hover{background:var(--rust-lt)}
-.rv-author{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink60)}
-.rv-text{font-family:var(--F);font-style:italic;font-size:clamp(17px,1.8vw,22px);color:var(--ink);line-height:1.4}
-.rv-stars{font-size:12px;color:var(--rust);letter-spacing:2px;text-align:right}
+  .bridge-link::after {
+    content: ' →';
+    font-style: normal;
+    font-size: 1.2rem;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  CONTACT
-──────────────────────────────────────────────────────────────*/
-.contact-wrap{
-  display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px);
-}
-.contact-left{
-  background:var(--ink);color:var(--paper);
-  padding:80px 64px;display:flex;flex-direction:column;justify-content:space-between;
-  position:sticky;top:64px;height:calc(100vh - 64px);
-}
-.contact-left h2{font-family:var(--F);font-size:clamp(44px,5.5vw,80px);font-weight:300;line-height:.95;margin-bottom:24px}
-.contact-left h2 em{font-style:italic;color:var(--rust)}
-.contact-left p{font-size:14px;line-height:1.8;color:rgba(244,240,232,.5);max-width:380px}
-.contact-details{margin-top:auto}
-.cd-item{display:flex;gap:16px;align-items:center;padding:20px 0;border-top:1px solid rgba(244,240,232,.08)}
-.cd-icon{width:36px;height:36px;border:1px solid rgba(244,240,232,.15);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:var(--rust)}
-.cd-txt p:first-child{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,240,232,.3);margin-bottom:2px}
-.cd-txt p:last-child{font-size:14px;color:rgba(244,240,232,.8)}
-.contact-right{padding:80px 64px;background:var(--chalk)}
-.contact-right h3{font-family:var(--F);font-size:32px;font-weight:300;margin-bottom:40px}
-.contact-right h3 em{font-style:italic;color:var(--rust-dk)}
-.field{margin-bottom:2px}
-.field label{display:block;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink60);padding:18px 0 6px}
-.field input,.field textarea{
-  display:block;width:100%;background:var(--paper);
-  border:none;border-bottom:1px solid var(--border);
-  padding:4px 0 16px;font-family:var(--S);font-size:14px;color:var(--ink);
-  outline:none;transition:border-color .2s;
-}
-.field textarea{min-height:130px;resize:none}
-.field input:focus,.field textarea:focus{border-color:var(--rust)}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.wa-wrap{display:flex;align-items:center;gap:12px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border)}
-.wa-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  background:#25D366;color:#fff;font-family:var(--S);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-  padding:13px 24px;text-decoration:none;cursor:none;
-  transition:background .2s;flex-shrink:0;
-}
-.wa-btn:hover{background:#1da954}
-.wa-note{font-size:12px;color:var(--ink60);line-height:1.6}
+  .bridge-link:hover { opacity: 0.7; }
 
-/*──────────────────────────────────────────────────────────────
-  LIGHTBOX
-──────────────────────────────────────────────────────────────*/
-#lb{
-  display:none;position:fixed;inset:0;z-index:500;
-  background:rgba(13,11,9,.97);align-items:center;justify-content:center;padding:40px;
-}
-#lb.on{display:flex}
-.lb-in{display:flex;gap:52px;align-items:center;max-width:980px;max-height:90vh}
-.lb-img{max-height:80vh;max-width:600px;object-fit:contain;flex-shrink:0}
-.lb-txt{color:var(--paper);min-width:180px}
-.lb-num{font-size:9px;letter-spacing:.3em;color:rgba(244,240,232,.22);margin-bottom:12px}
-.lb-tag{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--rust);margin-bottom:14px}
-.lb-title{font-family:var(--F);font-style:italic;font-size:32px;font-weight:300;margin-bottom:14px;line-height:1.1}
-.lb-desc{font-size:13px;line-height:1.75;color:rgba(244,240,232,.45);margin-bottom:20px}
-.lb-med{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,240,232,.22)}
-.lb-nav{display:flex;gap:8px;margin-top:28px}
-.lb-arr{
-  background:none;border:1px solid rgba(244,240,232,.15);color:rgba(244,240,232,.5);
-  width:36px;height:36px;cursor:none;font-size:16px;transition:border-color .2s,color .2s;
-}
-.lb-arr:hover{border-color:var(--rust);color:var(--rust)}
-#lb-close{
-  position:fixed;top:24px;right:36px;background:none;border:none;
-  color:rgba(244,240,232,.35);font-size:24px;cursor:none;padding:8px;
-  transition:color .2s;line-height:1;
-}
-#lb-close:hover{color:var(--paper)}
+  /* SECTION CONTAINER */
+  .section-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  STRIPE — narrative bridge between sections
-──────────────────────────────────────────────────────────────*/
-.bridge{
-  background:var(--rust);padding:60px 64px;
-  display:flex;align-items:center;justify-content:space-between;gap:40px;
-}
-.bridge-q{font-family:var(--F);font-style:italic;font-size:clamp(20px,2.4vw,32px);color:#fff;max-width:600px;line-height:1.4}
-.bridge-q strong{font-style:normal;font-weight:600}
+  /* EYEBROW */
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  ABOUT TEASER (home page)
-──────────────────────────────────────────────────────────────*/
-.teaser-split{
-  display:grid;grid-template-columns:1fr 1fr;min-height:70vh;
-}
-.teaser-img{position:relative;overflow:hidden}
-.teaser-img img{width:100%;height:100%;object-fit:cover;display:block}
-.teaser-words{
-  background:var(--ink);color:var(--paper);
-  padding:80px 64px;display:flex;flex-direction:column;justify-content:center;
-}
-.teaser-words .tag{color:var(--rust)}
-.teaser-words h2{font-family:var(--F);font-size:clamp(36px,4vw,60px);font-weight:300;line-height:1.05;margin-bottom:24px}
-.teaser-words h2 em{font-style:italic;color:var(--rust)}
-.teaser-words p{font-size:14px;line-height:1.8;color:rgba(244,240,232,.5);max-width:380px;margin-bottom:16px}
-.teaser-words blockquote{
-  border-left:2px solid var(--rust);padding-left:18px;
-  font-family:var(--F);font-style:italic;font-size:20px;
-  color:rgba(244,240,232,.75);line-height:1.5;margin:28px 0;
-}
+  /* ========================
+     HOME PAGE
+  ======================== */
+  #home .hero {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  FEATURED STRIP (home → exclusive bridge)
-──────────────────────────────────────────────────────────────*/
-.feat-strip{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-}
-.feat-card{
-  position:relative;overflow:hidden;aspect-ratio:3/4;cursor:none;
-  background:var(--ink);
-}
-.feat-card img{width:100%;height:100%;object-fit:cover;opacity:.65;transition:transform .6s,opacity .4s}
-.feat-card:hover img{transform:scale(1.05);opacity:.85}
-.feat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(13,11,9,.88) 30%,transparent 70%)}
-.feat-body{position:absolute;bottom:0;left:0;right:0;padding:32px 24px 28px;z-index:2}
-.feat-tag{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
-.feat-name{font-family:var(--F);font-style:italic;font-size:24px;color:var(--paper);margin-bottom:6px}
-.feat-med{font-size:10px;letter-spacing:.12em;color:rgba(244,240,232,.35)}
-.feat-card:nth-child(2){border-left:1px solid rgba(244,240,232,.08);border-right:1px solid rgba(244,240,232,.08)}
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  HOME INTRO STRIP
-──────────────────────────────────────────────────────────────*/
-.intro-strip{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  border-top:1px solid var(--border);
-}
-.intro-cell{
-  padding:44px 40px;border-right:1px solid var(--border);
-  cursor:none;transition:background .25s;
-}
-.intro-cell:last-child{border-right:none}
-.intro-cell:hover{background:var(--rust-lt)}
-.intro-cell-icon{font-size:28px;margin-bottom:20px}
-.intro-cell-t{font-family:var(--F);font-size:22px;font-weight:400;margin-bottom:10px}
-.intro-cell-t em{font-style:italic;color:var(--rust-dk)}
-.intro-cell-p{font-size:13px;line-height:1.7;color:var(--ink60);margin-bottom:16px}
+  .hero-tagline {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-style: italic;
+    color: var(--cream-dim);
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
 
-/*──────────────────────────────────────────────────────────────
-  FOOTER
-──────────────────────────────────────────────────────────────*/
-footer{
-  background:var(--ink);color:var(--paper);
-  padding:60px 64px 40px;
-}
-.ft{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:52px;padding-bottom:52px;border-bottom:1px solid rgba(244,240,232,.07)}
-.ft-brand{font-family:var(--F);font-size:20px;font-weight:300;letter-spacing:.1em}
-.ft-brand small{display:block;font-family:var(--S);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,240,232,.25);margin-top:6px}
-.ft-brand p{font-size:13px;line-height:1.7;color:rgba(244,240,232,.35);margin-top:16px;max-width:240px}
-.ft-nav h6{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(244,240,232,.25);margin-bottom:20px}
-.ft-nav a{display:block;font-size:13px;color:rgba(244,240,232,.45);text-decoration:none;cursor:none;margin-bottom:10px;transition:color .2s}
-.ft-nav a:hover{color:var(--rust)}
-.ft-loc{text-align:right}
-.ft-loc p:first-child{font-family:var(--F);font-style:italic;font-size:36px;font-weight:300;color:rgba(244,240,232,.2);margin-bottom:8px}
-.ft-loc p:last-child{font-size:12px;color:rgba(244,240,232,.25);letter-spacing:.1em}
-.ft-bot{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(244,240,232,.18)}
+  .hero-nav-cards {
+    display: flex;
+    gap: 1px;
+    margin-top: 3rem;
+    border: 1px solid var(--divider-strong);
+    background: var(--divider);
+  }
 
-/*──────────────────────────────────────────────────────────────
-  RESPONSIVE
-──────────────────────────────────────────────────────────────*/
-@media(max-width:960px){
-  body{cursor:auto}#C1,#C2{display:none}
-  #nav{padding:0 24px}
-  .nl{display:none;position:fixed;top:64px;left:0;right:0;flex-direction:column;background:var(--chalk);border-bottom:1px solid var(--border);z-index:299;padding:8px 0}
-  .nl.on{display:flex}
-  .nl a{line-height:1;padding:14px 24px}
-  #burger{display:flex}
-  .hero{grid-template-columns:1fr}
-  .hero-canvas{height:56vw}
-  .hero-words{padding:60px 24px 48px}
-  .hero-meta{gap:28px}
-  .S{padding:60px 24px}
-  .ex-intro{padding:48px 24px 0}
-  .ex-intro-inner{grid-template-columns:1fr;gap:24px}
-  .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:200px;padding:0 24px 48px;gap:6px}
-  .art{grid-column:auto!important;grid-row:auto!important}
-  .art:nth-child(1),.art:nth-child(11){grid-column:1/-1!important}
-  .excl-hero{padding:40px 24px}
-  .excl-grid{grid-template-columns:1fr 1fr}
-  .ec-featured{grid-column:1/-1;aspect-ratio:16/9;min-height:auto}
-  .about-split{grid-template-columns:1fr}
-  .about-sticky{position:relative;height:60vw;top:0}
-  .about-scroll{padding:48px 24px}
-  .reviews-hero{grid-template-columns:1fr;padding:48px 24px 0}
-  .rv-card{grid-template-columns:1fr;gap:12px;padding:24px}
-  .rv-stars{text-align:left}
-  .contact-wrap{grid-template-columns:1fr}
-  .contact-left{position:relative;height:auto;padding:56px 24px}
-  .contact-right{padding:56px 24px}
-  .teaser-split{grid-template-columns:1fr}
-  .teaser-img{height:60vw}
-  .teaser-words{padding:56px 24px}
-  .feat-strip{grid-template-columns:1fr}
-  .feat-card{aspect-ratio:16/9}
-  .feat-card:nth-child(2){border:none;border-top:1px solid rgba(244,240,232,.08);border-bottom:1px solid rgba(244,240,232,.08)}
-  .intro-strip{grid-template-columns:1fr}
-  .intro-cell{border-right:none;border-bottom:1px solid var(--border)}
-  .bridge{flex-direction:column;padding:48px 24px;gap:24px}
-  footer{padding:48px 24px 28px}
-  .ft{grid-template-columns:1fr}
-  .ft-loc{text-align:left}
-  .ft-bot{flex-direction:column;gap:6px}
-  .frow{grid-template-columns:1fr}
-  .ex-filter{overflow-x:auto;padding:0 24px}
-  .sec-hd{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:40px}
-  .lb-in{flex-direction:column;gap:24px;overflow-y:auto}
-  .lb-img{max-width:100%;max-height:55vh}
-  .skills-grid{grid-template-columns:1fr}
-  .hero-scroll{left:24px}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  .hero-nav-card {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.25s;
+    border-right: 1px solid var(--divider-strong);
+    background: var(--bg);
+  }
+
+  .hero-nav-card:last-child { border-right: none; }
+
+  .hero-nav-card:hover { background: var(--bg-warm); }
+
+  .hero-nav-card-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+
+  .hero-nav-card-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-nav-card-desc {
+    font-size: 12px;
+    color: var(--cream-dim);
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+
+  .artist-statement {
+    max-width: 620px;
+    margin: 5rem auto;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .statement-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .statement-attr {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.65;
+  }
+
+  .home-teaser {
+    padding: 4rem 2.5rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .home-teaser-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.5;
+    text-align: center;
+    display: block;
+    margin-bottom: 3rem;
+  }
+
+  .teaser-works {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    border: 1px solid var(--divider);
+  }
+
+  .teaser-work {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--bg-warm);
+  }
+
+  .teaser-work img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.9) saturate(0.9);
+    transition: filter 0.4s, transform 0.4s;
+  }
+
+  .teaser-work:hover img {
+    filter: brightness(1) saturate(1.05);
+    transform: scale(1.04);
+  }
+
+  .teaser-work-name {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #fff;
+    pointer-events: none;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  }
+
+  .home-cta {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .cta-text {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--cream-dim);
+    margin-bottom: 1rem;
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border: 1px solid var(--divider-strong);
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .btn-ghost:hover {
+    background: var(--bg-warm);
+    border-color: var(--cream-dim);
+  }
+
+  /* ========================
+     EXHIBITION PAGE
+  ======================== */
+  .page-header {
+    padding: 5rem 2.5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--cream-dim);
+    opacity: 0.8;
+  }
+
+  .filter-bar {
+    padding: 0 2.5rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-pill {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    border: 1px solid var(--divider-strong);
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    font-family: var(--sans);
+    font-weight: 400;
+  }
+
+  .filter-pill:hover { border-color: var(--cream-dim); color: var(--ink); }
+  .filter-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    border: 1px solid var(--divider-strong);
+    background: var(--divider);
+  }
+
+  .gallery-item {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: var(--bg-warm);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.92) saturate(0.9);
+    transition: filter 0.35s, transform 0.35s;
+    display: block;
+  }
+
+  .gallery-item:hover img {
+    filter: brightness(1) saturate(1.05);
+    transform: scale(1.05);
+  }
+
+  .gallery-item-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.5rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(46,31,15,0.75) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover .gallery-item-info { opacity: 1; }
+
+  .gallery-item-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: #fff;
+    display: block;
+  }
+
+  .gallery-item-medium {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,220,180,0.9);
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  .gallery-item[data-hidden="true"] { display: none; }
+
+  /* LIGHTBOX */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(253,246,236,0.98);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .lightbox-overlay.open { display: flex; }
+
+  .lightbox-inner {
+    display: flex;
+    align-items: stretch;
+    max-width: 1100px;
+    width: 95%;
+    max-height: 90vh;
+    gap: 3rem;
+  }
+
+  .lightbox-img-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .lightbox-img-wrap img {
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .lightbox-info {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+
+  .lightbox-medium {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .lightbox-name {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .lightbox-story {
+    font-size: 14px;
+    color: var(--cream-dim);
+    line-height: 1.75;
+  }
+
+  .lightbox-nav {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .lightbox-nav button {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    border: 1px solid var(--divider-strong);
+    background: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--sans);
+  }
+
+  .lightbox-nav button:hover { color: var(--ink); border-color: var(--cream-dim); }
+
+  .lightbox-counter {
+    font-size: 11px;
+    color: var(--cream-dim);
+    opacity: 0.5;
+    margin-top: 1rem;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: color 0.2s;
+  }
+
+  .lightbox-close:hover { color: var(--ink); }
+
+  /* ========================
+     EXCLUSIVE SERIES
+  ======================== */
+  .exclusive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    border: 1px solid var(--divider-strong);
+    background: var(--divider);
+  }
+
+  .exclusive-card {
+    background: var(--bg);
+    cursor: pointer;
+    transition: background 0.25s;
+    overflow: hidden;
+  }
+
+  .exclusive-card:hover { background: var(--bg-warm); }
+
+  .exclusive-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .exclusive-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter 0.35s, transform 0.35s;
+    display: block;
+  }
+
+  .exclusive-card:hover .exclusive-thumb img {
+    filter: brightness(1) saturate(1.05);
+    transform: scale(1.04);
+  }
+
+  .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .play-btn svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .exclusive-card:hover .play-btn svg {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .exclusive-card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    border-top: 1px solid var(--divider);
+  }
+
+  .exclusive-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .exclusive-card-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .exclusive-card-medium {
+    font-size: 11px;
+    color: var(--cream-dim);
+    opacity: 0.7;
+  }
+
+  .exclusive-editorial {
+    max-width: 700px;
+    margin: 5rem auto 0;
+    padding: 0 2.5rem;
+  }
+
+  .exclusive-editorial-title {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .editorial-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .editorial-item-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .editorial-item-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .editorial-item-name {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+  }
+
+  .editorial-item-body {
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    opacity: 0.85;
+    padding-left: 3.5rem;
+  }
+
+  .video-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(46,31,15,0.97);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .video-modal-overlay.open { display: flex; }
+
+  .video-modal-inner {
+    width: 90%;
+    max-width: 900px;
+  }
+
+  .video-modal-inner iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+  }
+
+  .video-modal-close {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,230,210,0.6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: color 0.2s;
+    text-align: center;
+    width: 100%;
+  }
+
+  .video-modal-close:hover { color: #f5e6d2; }
+
+  /* ========================
+     ABOUT PAGE
+  ======================== */
+  .about-section {
+    padding: 5rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .about-section:last-of-type { border-bottom: none; }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-section-label {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+    opacity: 0.2;
+    line-height: 1;
+    padding-top: 0.25rem;
+  }
+
+  .about-body {
+    font-size: 15px;
+    color: var(--cream-dim);
+    line-height: 1.85;
+  }
+
+  /* ========================
+     REVIEWS PAGE
+  ======================== */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    border: 1px solid var(--divider-strong);
+    background: var(--divider);
+  }
+
+  .review-card {
+    padding: 2.5rem 2rem;
+    background: var(--bg);
+    border-right: 1px solid var(--divider);
+    transition: background 0.2s;
+  }
+
+  .review-card:hover { background: var(--bg-warm); }
+
+  .review-quote {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .review-quote::before {
+    content: '"';
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-right: 0.15em;
+    font-family: var(--serif);
+  }
+
+  .review-meta { display: flex; flex-direction: column; gap: 0.15rem; }
+
+  .review-name {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .review-city {
+    font-size: 11px;
+    color: var(--cream-dim);
+    opacity: 0.6;
+    letter-spacing: 0.08em;
+  }
+
+  /* ========================
+     CONTACT PAGE
+  ======================== */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem 5rem;
+  }
+
+  .contact-headline {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-intro {
+    font-size: 14px;
+    color: var(--cream-dim);
+    opacity: 0.85;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-detail-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .contact-detail-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    flex-shrink: 0;
+    padding-top: 0.1rem;
+    width: 70px;
+  }
+
+  .contact-detail-val {
+    font-size: 14px;
+    color: var(--cream-dim);
+  }
+
+  .whatsapp-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a5e2e;
+    border: 1px solid rgba(37,140,70,0.35);
+    padding: 0.75rem 1.75rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+    font-weight: 500;
+    background: rgba(37,140,70,0.06);
+  }
+
+  .whatsapp-btn:hover {
+    background: rgba(37,140,70,0.12);
+    border-color: rgba(37,140,70,0.6);
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--divider-strong);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 0.6rem 0;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    resize: none;
+  }
+
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: var(--cream-dim); opacity: 0.45; }
+
+  .form-submit {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 0.85rem 2rem;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 500;
+    transition: opacity 0.2s;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover { opacity: 0.75; }
+
+  .form-error {
+    font-size: 11px;
+    color: #b33a1e;
+    display: none;
+  }
+
+  .form-success {
+    text-align: center;
+    padding: 2rem;
+    display: none;
+  }
+
+  .form-success-text {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--cream-dim);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 9px; }
+    .hero-nav-cards { flex-direction: column; border: none; gap: 1px; }
+    .hero-nav-card { border-right: none; border-bottom: 1px solid var(--divider-strong); }
+    .gallery-grid { padding: 0 1.25rem; }
+    .teaser-works { grid-template-columns: 1fr; }
+    .about-layout { grid-template-columns: 1fr; gap: 1rem; }
+    .about-section-label { font-size: 1.2rem; opacity: 0.5; }
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .lightbox-inner { flex-direction: column; }
+    .lightbox-info { width: 100%; padding: 1rem 0; }
+    .exclusive-grid { padding: 0 1.25rem; }
+  }
 </style>
 </head>
 <body>
 
-<div id="C1" style="position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);width:9px;height:9px;background:var(--ink)"></div>
-<div id="C2" style="position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);width:36px;height:36px;border:1px solid var(--ink);opacity:.35"></div>
-
-<!-- ─── NAV ─── -->
-<nav id="nav">
-  <a class="logo" href="#" onclick="goto('home');return false">Arts by Feroz</a>
-  <ul class="nl" id="nl">
-    <li><a href="#" onclick="goto('home');return false" data-p="home" class="on">Home</a></li>
-    <li><a href="#" onclick="goto('exhibition');return false" data-p="exhibition">Exhibition</a></li>
-    <li><a href="#" onclick="goto('exclusive');return false" data-p="exclusive">Exclusive</a></li>
-    <li><a href="#" onclick="goto('about');return false" data-p="about">About Me</a></li>
-    <li><a href="#" onclick="goto('reviews');return false" data-p="reviews">Reviews</a></li>
-    <li><a href="#" onclick="goto('contact');return false" data-p="contact">Contact</a></li>
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Feroz Khan</div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" data-page="home">Home</a></li>
+    <li><a onclick="showPage('exhibition')" data-page="exhibition">Exhibition</a></li>
+    <li><a onclick="showPage('exclusive')" data-page="exclusive">Exclusive</a></li>
+    <li><a onclick="showPage('about')" data-page="about">About</a></li>
+    <li><a onclick="showPage('reviews')" data-page="reviews">Reviews</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
   </ul>
-  <button id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
+<!-- ======================== HOME ======================== -->
+<div id="home" class="page active">
+  <div class="hero">
+    <span class="eyebrow">Original Art · Bhopal, India</span>
+    <h1 class="hero-name">Feroz<br>Khan</h1>
+    <p class="hero-tagline">Painter of landscapes, abstracts &amp; the spaces in between</p>
 
-<!-- ══════════════════════════════════════════════════
-     HOME
-══════════════════════════════════════════════════ -->
-<div class="pg on" id="pg-home">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-words">
-      <p class="tag">Bhopal, India · Est. 2020</p>
-      <h1 class="hero-h">Arts<br>by<br><em>Feroz</em></h1>
-      <p class="hero-accent-word">"I dream of painting and<br>then I paint my dream."<br><strong>— Vincent Van Gogh</strong></p>
-      <div class="hero-ctas">
-        <a class="btn-dk" href="#" onclick="goto('exhibition');return false">See the Exhibition →</a>
-        <a class="btn-lt" href="#" onclick="goto('exclusive');return false">Exclusive Series</a>
+    <div class="hero-nav-cards">
+      <div class="hero-nav-card" onclick="showPage('exhibition')">
+        <span class="hero-nav-card-label">Gallery</span>
+        <span class="hero-nav-card-title">The Exhibition</span>
+        <span class="hero-nav-card-desc">14 original artworks spanning acrylic, string art, and abstract.</span>
       </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item"><div class="n">14+</div><div class="l">Original Works</div></div>
-        <div class="hero-meta-item"><div class="n">5</div><div class="l">Exclusive Pieces</div></div>
-        <div class="hero-meta-item"><div class="n">∞</div><div class="l">Stories Told</div></div>
+      <div class="hero-nav-card" onclick="showPage('exclusive')">
+        <span class="hero-nav-card-label">Films</span>
+        <span class="hero-nav-card-title">Exclusive Series</span>
+        <span class="hero-nav-card-desc">Five works with time-lapse films. Watch the canvas come alive.</span>
       </div>
-    </div>
-    <div class="hero-canvas">
-      <img src="https://static.wixstatic.com/media/Nirvana.jpg"
-           onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80'"
-           alt="Nirvana by Feroz Khan">
-      <span class="hero-canvas-label">Nirvana — Exclusive #4</span>
-    </div>
-    <div class="hero-scroll"><div class="hs-line"></div>Scroll</div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="mband" aria-hidden="true">
-    <div class="mtrack">
-      <span class="mi">Chaos and the Calm</span><span class="md"></span>
-      <span class="mi">Nirvana</span><span class="md"></span>
-      <span class="mi">Eternity</span><span class="md"></span>
-      <span class="mi">Euphoria</span><span class="md"></span>
-      <span class="mi">The Masterpiece</span><span class="md"></span>
-      <span class="mi">Misty Blue</span><span class="md"></span>
-      <span class="mi">An Epiphany</span><span class="md"></span>
-      <span class="mi">The Other World</span><span class="md"></span>
-      <span class="mi">Serendipity</span><span class="md"></span>
-      <span class="mi">Awakening</span><span class="md"></span>
-      <span class="mi">Chaos and the Calm</span><span class="md"></span>
-      <span class="mi">Nirvana</span><span class="md"></span>
-      <span class="mi">Eternity</span><span class="md"></span>
-      <span class="mi">Euphoria</span><span class="md"></span>
-      <span class="mi">The Masterpiece</span><span class="md"></span>
-      <span class="mi">Misty Blue</span><span class="md"></span>
-      <span class="mi">An Epiphany</span><span class="md"></span>
-      <span class="mi">The Other World</span><span class="md"></span>
-      <span class="mi">Serendipity</span><span class="md"></span>
-      <span class="mi">Awakening</span><span class="md"></span>
-    </div>
-  </div>
-
-  <!-- THREE DOORS: navigation as content -->
-  <div class="intro-strip rv">
-    <div class="intro-cell" onclick="goto('exhibition')">
-      <div class="intro-cell-icon">🎨</div>
-      <div class="intro-cell-t">The <em>Exhibition</em></div>
-      <p class="intro-cell-p">14 original works — acrylic landscapes, string sculptures, and abstract meditations. Each one painted from a different corner of the imagination.</p>
-      <a class="tlink" href="#" onclick="goto('exhibition');return false">Browse all works →</a>
-    </div>
-    <div class="intro-cell" onclick="goto('exclusive')">
-      <div class="intro-cell-icon">🎬</div>
-      <div class="intro-cell-t">Exclusive <em>Series</em></div>
-      <p class="intro-cell-p">Five deeply personal works — each paired with a cinematic time-lapse. Put your earphones on. This is art you watch as much as look at.</p>
-      <a class="tlink" href="#" onclick="goto('exclusive');return false">Experience the series →</a>
-    </div>
-    <div class="intro-cell" onclick="goto('about')">
-      <div class="intro-cell-icon">🖌</div>
-      <div class="intro-cell-t">About <em>Feroz Khan</em></div>
-      <p class="intro-cell-p">Self-taught. Acrylic-first. Bhopal, India. A creative thinker who paints the intricacies he notices between humans and their world.</p>
-      <a class="tlink" href="#" onclick="goto('about');return false">Who is Feroz? →</a>
-    </div>
-  </div>
-
-  <!-- ABOUT TEASER — sticky image + scrolling text -->
-  <div class="teaser-split">
-    <div class="teaser-img rv">
-      <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80"
-           onerror="this.src='https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80'"
-           alt="Feroz painting">
-    </div>
-    <div class="teaser-words rv2">
-      <p class="tag">The Artist</p>
-      <h2>Painting<br><em>imagination</em><br>on canvas</h2>
-      <blockquote>"Before I realized, I started painting my imagination on canvas and never looked back."</blockquote>
-      <p>I am Feroz Khan. I live in Bhopal, India. I use brushes, toothbrushes, ice-cream sticks — everything I can grab — to paint my dreams. Landscape scenery alongside abstract art.</p>
-      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
-        <a class="btn-rust" href="#" onclick="goto('about');return false">My Story →</a>
-        <a class="btn-lt" style="color:rgba(244,240,232,.6);border-color:rgba(244,240,232,.2)" href="#" onclick="goto('reviews');return false">Read Reviews</a>
+      <div class="hero-nav-card" onclick="showPage('about')">
+        <span class="hero-nav-card-label">The Artist</span>
+        <span class="hero-nav-card-title">About Me</span>
+        <span class="hero-nav-card-desc">A self-taught painter from Bhopal with paint on his hands and dreams on canvas.</span>
       </div>
     </div>
   </div>
 
-  <!-- FEATURED THREE — bridge to exclusive -->
-  <section style="background:var(--ink);padding:64px 64px 0">
-    <div class="sec-hd rv">
-      <h2 class="sec-t" style="color:var(--paper)">Signature <em>Works</em></h2>
-      <a class="tlink tlink-inv" href="#" onclick="goto('exclusive');return false">Full exclusive series →</a>
-    </div>
-  </section>
-  <div class="feat-strip rv" style="background:var(--ink)">
-    <div class="feat-card" onclick="goto('exclusive')">
-      <img src="https://static.wixstatic.com/media/Nirvana.jpg" onerror="this.src='https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80'" alt="Nirvana">
-      <div class="feat-body">
-        <div class="feat-tag">Exclusive #4</div>
-        <div class="feat-name">Nirvana</div>
-        <div class="feat-med">Acrylic · With film</div>
-      </div>
-    </div>
-    <div class="feat-card" onclick="goto('exclusive')">
-      <img src="https://static.wixstatic.com/media/Eternity_JPG.jpg" onerror="this.src='https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=700&q=80'" alt="Eternity">
-      <div class="feat-body">
-        <div class="feat-tag">Exclusive #3</div>
-        <div class="feat-name">Eternity</div>
-        <div class="feat-med">Abstract Acrylic · With film</div>
-      </div>
-    </div>
-    <div class="feat-card" onclick="goto('exclusive')">
-      <img src="https://static.wixstatic.com/media/photo_2024-08-10_02-21-04.jpg" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80'" alt="Euphoria">
-      <div class="feat-body">
-        <div class="feat-tag">Exclusive #5</div>
-        <div class="feat-name">Euphoria</div>
-        <div class="feat-med">Umber & Bronze · With film</div>
-      </div>
-    </div>
-  </div>
-  <div style="background:var(--ink);padding:32px 64px 64px;text-align:center">
-    <a class="btn-rust" href="#" onclick="goto('exclusive');return false">Watch all five films →</a>
+  <div class="artist-statement">
+    <p class="statement-quote">"I dream of painting and then I paint my dream."</p>
+    <span class="statement-attr">— Vincent Van Gogh</span>
   </div>
 
-  <!-- BRIDGE TO CONTACT -->
-  <div class="bridge rv">
-    <p class="bridge-q">"Each painting conveys a human attribute. Some reflect ease, others exhibit effort while a <strong>few manifest motivation.</strong>"</p>
-    <a class="btn-dk" style="background:#fff;color:var(--ink);white-space:nowrap" href="#" onclick="goto('contact');return false">Commission a work →</a>
-  </div>
-
-</div><!-- /home -->
-
-
-<!-- ══════════════════════════════════════════════════
-     EXHIBITION
-══════════════════════════════════════════════════ -->
-<div class="pg" id="pg-exhibition">
-
-  <div class="ex-intro">
-    <div class="ex-intro-inner rv">
-      <div>
-        <p class="tag">Exuberance — 2024</p>
-        <h2 class="sec-t" style="font-size:clamp(40px,5vw,72px)">The <em>Exhibition</em></h2>
+  <div class="home-teaser">
+    <span class="home-teaser-label">Signature Works</span>
+    <div class="teaser-works">
+      <div class="teaser-work" onclick="openLightboxByName('Nirvana')">
+        <img src="images/Nirvana.jpg" alt="Nirvana" onerror="this.style.background='#1c1a17';this.style.display='block'">
+        <span class="teaser-work-name">Nirvana</span>
       </div>
-      <div>
-        <p style="font-size:14px;line-height:1.8;color:var(--ink60);margin-bottom:20px">14 original works across acrylic, string art, and mixed media. Click any painting to learn its story. Enquire below to commission your own.</p>
-        <a class="tlink" href="#" onclick="goto('contact');return false">Commission a work →</a>
+      <div class="teaser-work" onclick="openLightboxByName('Eternity')">
+        <img src="images/Eternity_JPG.jpg" alt="Eternity" onerror="this.style.background='#201e1a';this.style.display='block'">
+        <span class="teaser-work-name">Eternity</span>
+      </div>
+      <div class="teaser-work" onclick="openLightboxByName('Euphoria')">
+        <img src="images/11.jpg" alt="Euphoria" onerror="this.style.background='#181613';this.style.display='block'">
+        <span class="teaser-work-name">Euphoria</span>
       </div>
     </div>
-    <div class="ex-filter" id="exfilter">
-      <button class="filter-btn on" data-filter="all">All Works</button>
-      <button class="filter-btn" data-filter="acrylic">Acrylic</button>
-      <button class="filter-btn" data-filter="string">String Art</button>
-      <button class="filter-btn" data-filter="abstract">Abstract</button>
+
+    <div class="home-cta">
+      <p class="cta-text">Something stirs. Let's talk about it.</p>
+      <button class="btn-ghost" onclick="showPage('contact')">Get in Touch</button>
     </div>
   </div>
 
-  <div class="gallery" id="gallery">
-
-    <div class="art" data-cat="acrylic" onclick="openLb(0)">
-      <img src="https://static.wixstatic.com/media/1.jpg" onerror="this.src='https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=700&q=80'" alt="Chaos and the Calm">
-      <div class="art-ov"></div><span class="art-n">01</span>
-      <div class="art-body"><div class="art-t">Chaos and the Calm</div><div class="art-s">Inspired from a summer road trip, this vibrant artwork unravels the beauty of the setting Sun and lil' birds calling it a day.</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="string" onclick="openLb(1)">
-      <img src="https://static.wixstatic.com/media/2.jpg" onerror="this.src='https://images.unsplash.com/photo-1579541591970-288a6090e8d7?w=700&q=80'" alt="Connect the Nails">
-      <div class="art-ov"></div><span class="art-n">02</span>
-      <div class="art-body"><div class="art-t">Connect the Nails</div><div class="art-s">Uncountable nails, a long spindle of white thread, and one leafless tree that speaks volumes.</div><div class="art-m">String Art</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(2)">
-      <img src="https://static.wixstatic.com/media/4.jpg" onerror="this.src='https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80'" alt="Misty Blue">
-      <div class="art-ov"></div><span class="art-n">03</span>
-      <div class="art-body"><div class="art-t">Misty Blue</div><div class="art-s">Lost in the midst of endless bliss, tethered to the mists of divine blue.</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(3)">
-      <img src="https://static.wixstatic.com/media/5.jpg" onerror="this.src='https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=700&q=80'" alt="Just Hanging Around">
-      <div class="art-ov"></div><span class="art-n">04</span>
-      <div class="art-body"><div class="art-t">Just Hanging Around</div><div class="art-s">Have you never been somewhere but felt like you've lived there forever?</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="abstract" onclick="openLb(4)">
-      <img src="https://static.wixstatic.com/media/6.jpg" onerror="this.src='https://images.unsplash.com/photo-1549490349-8643362247b5?w=700&q=80'" alt="Awakening">
-      <div class="art-ov"></div><span class="art-n">05</span>
-      <div class="art-body"><div class="art-t">Awakening</div><div class="art-s">The capacity to reflect on your own nature — the rational and sensuous experience.</div><div class="art-m">Abstract · Acrylic</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(5)">
-      <img src="https://static.wixstatic.com/media/7.jpg" onerror="this.src='https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=700&q=80'" alt="Serendipity">
-      <div class="art-ov"></div><span class="art-n">06</span>
-      <div class="art-body"><div class="art-t">Serendipity</div><div class="art-s">How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations.</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(6)">
-      <img src="https://static.wixstatic.com/media/8.jpg" onerror="this.src='https://images.unsplash.com/photo-1519638399535-1b036603ac77?w=700&q=80'" alt="Shades n' Silhouettes">
-      <div class="art-ov"></div><span class="art-n">07</span>
-      <div class="art-body"><div class="art-t">Shades n' Silhouettes</div><div class="art-s">Life is not plain black and white. It's the shades of grey that define it.</div><div class="art-m">Monochromatic · Acrylic</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(7)">
-      <img src="https://static.wixstatic.com/media/9.jpg" onerror="this.src='https://images.unsplash.com/photo-1493366897252-acbfedac4a8b?w=700&q=80'" alt="The Other World">
-      <div class="art-ov"></div><span class="art-n">08</span>
-      <div class="art-body"><div class="art-t">The Other World</div><div class="art-s">One of my favourites. The joy of stroking the brush as I blended the colours.</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="acrylic" onclick="openLb(8)">
-      <img src="https://static.wixstatic.com/media/10.jpg" onerror="this.src='https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=700&q=80'" alt="The Time Zones">
-      <div class="art-ov"></div><span class="art-n">09</span>
-      <div class="art-body"><div class="art-t">The Time Zones</div><div class="art-s">One world. Seven Continents. Endless Stories — most lost in the mists of time.</div><div class="art-m">Acrylic on Canvas</div></div>
-    </div>
-
-    <div class="art" data-cat="abstract" onclick="openLb(9)">
-      <img src="https://static.wixstatic.com/media/11.jpg" onerror="this.src='https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80'" alt="An Epiphany">
-      <div class="art-ov"></div><span class="art-n">10</span>
-      <div class="art-body"><div class="art-t">An Epiphany</div><div class="art-s">While sipping my favourite countrybean, I thought — why not make my next artwork with this coffee itself?</div><div class="art-m">Coffee & Acrylic</div></div>
-    </div>
-
-    <div class="art" data-cat="abstract" onclick="openLb(10)">
-      <img src="https://static.wixstatic.com/media/Eternity_JPG.jpg" onerror="this.src='https://images.unsplash.com/photo-1536924430914-91f9e2041b83?w=700&q=80'" alt="Eternity">
-      <div class="art-ov"></div><span class="art-n">11</span>
-      <div class="art-body"><div class="art-t">Eternity</div><div class="art-s">Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts.</div><div class="art-m">Abstract Acrylic · Textured</div></div>
-    </div>
-
-    <div class="art" data-cat="abstract" onclick="openLb(11)">
-      <img src="https://static.wixstatic.com/media/Nirvana.jpg" onerror="this.src='https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=700&q=80'" alt="Nirvana">
-      <div class="art-ov"></div><span class="art-n">12</span>
-      <div class="art-body"><div class="art-t">Nirvana</div><div class="art-s">The extinction of desire, hatred, and ignorance — becoming extinguished as when a flame is blown out.</div><div class="art-m">Abstract Acrylic</div></div>
-    </div>
-
-    <div class="art" data-cat="string" onclick="openLb(12)">
-      <img src="https://static.wixstatic.com/media/as.jpg" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80'" alt="The Masterpiece">
-      <div class="art-ov"></div><span class="art-n">13</span>
-      <div class="art-body"><div class="art-t">The Masterpiece</div><div class="art-s">168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort.</div><div class="art-m">String Art · 554 Nails</div></div>
-    </div>
-
-    <div class="art" data-cat="abstract" onclick="openLb(13)">
-      <img src="https://static.wixstatic.com/media/photo_2024-08-10_02-21-04.jpg" onerror="this.src='https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=700&q=80'" alt="Euphoria">
-      <div class="art-ov"></div><span class="art-n">14</span>
-      <div class="art-body"><div class="art-t">Euphoria</div><div class="art-s">Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit.</div><div class="art-m">Acrylic · Umber & Bronze</div></div>
-    </div>
-
-  </div>
-
-  <div class="bridge rv">
-    <p class="bridge-q">Five of these works have their own films — time-lapses shot over <strong>hours, sometimes days.</strong> See the process behind the paint.</p>
-    <a class="btn-dk" style="background:#fff;color:var(--ink);white-space:nowrap" href="#" onclick="goto('exclusive');return false">Watch the films →</a>
-  </div>
-
-</div><!-- /exhibition -->
-
-
-<!-- ══════════════════════════════════════════════════
-     EXCLUSIVE SERIES
-══════════════════════════════════════════════════ -->
-<div class="pg" id="pg-exclusive">
-
-  <div class="excl-hero">
-    <div class="excl-hero-bg">
-      <img src="https://static.wixstatic.com/media/photo_2024-08-10_02-21-04.jpg" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=900&q=80'" alt="">
-    </div>
-    <div class="excl-hero-words rv">
-      <p class="tag">Limited Works</p>
-      <h1>Exclusive <em>Artwork Series</em></h1>
-      <p>Five deeply personal works — each paired with a cinematic time-lapse video. These aren't just paintings, they're experiences. Put your earphones on.</p>
-    </div>
-  </div>
-
-  <!-- 5 cards in a row -->
-  <div class="excl-grid S-dk" style="padding:0">
-
-    <div class="ec ec-featured" onclick="playVideo('https://www.youtube.com/embed/gnNhsgC_Jjo','Euphoria','Exclusive Artwork #5')">
-      <img src="https://img.youtube.com/vi/gnNhsgC_Jjo/maxresdefault.jpg" onerror="this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&q=80'" alt="Euphoria">
-      <div class="ec-body">
-        <div class="ec-num">Exclusive #5</div>
-        <div class="ec-t">Euphoria</div>
-        <div class="ec-sub">Umber · Raw Sienna · Bronze</div>
-        <a class="ec-play" href="#" onclick="playVideo('https://www.youtube.com/embed/gnNhsgC_Jjo','Euphoria','Exclusive Artwork #5');return false">▶ Watch film</a>
-      </div>
-    </div>
-
-    <div class="ec" onclick="playVideo('https://www.youtube.com/embed/KvmILY7PJOc','Nirvana','Exclusive Artwork #4')">
-      <img src="https://img.youtube.com/vi/KvmILY7PJOc/maxresdefault.jpg" onerror="this.src='https://static.wixstatic.com/media/Nirvana.jpg'" alt="Nirvana">
-      <div class="ec-body">
-        <div class="ec-num">Exclusive #4</div>
-        <div class="ec-t">Nirvana</div>
-        <div class="ec-sub">Abstract Acrylic</div>
-        <a class="ec-play" href="#" onclick="playVideo('https://www.youtube.com/embed/KvmILY7PJOc','Nirvana','Exclusive Artwork #4');return false">▶ Watch film</a>
-      </div>
-    </div>
-
-    <div class="ec" onclick="playVideo('https://www.youtube.com/embed/zEz0Rwnpwl8','Eternity','Exclusive Artwork #3')">
-      <img src="https://img.youtube.com/vi/zEz0Rwnpwl8/maxresdefault.jpg" onerror="this.src='https://static.wixstatic.com/media/Eternity_JPG.jpg'" alt="Eternity">
-      <div class="ec-body">
-        <div class="ec-num">Exclusive #3</div>
-        <div class="ec-t">Eternity</div>
-        <div class="ec-sub">Abstract · Textured</div>
-        <a class="ec-play" href="#" onclick="playVideo('https://www.youtube.com/embed/zEz0Rwnpwl8','Eternity','Exclusive Artwork #3');return false">▶ Watch film</a>
-      </div>
-    </div>
-
-    <div class="ec" onclick="playVideo('https://www.youtube.com/embed/r-TGy0XkzKA','An Epiphany','Exclusive Artwork #2')">
-      <img src="https://img.youtube.com/vi/r-TGy0XkzKA/maxresdefault.jpg" onerror="this.src='https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=700&q=80'" alt="Epiphany">
-      <div class="ec-body">
-        <div class="ec-num">Exclusive #2</div>
-        <div class="ec-t">An Epiphany</div>
-        <div class="ec-sub">Coffee & Acrylic</div>
-        <a class="ec-play" href="#" onclick="playVideo('https://www.youtube.com/embed/r-TGy0XkzKA','An Epiphany','Exclusive Artwork #2');return false">▶ Watch film</a>
-      </div>
-    </div>
-
-    <div class="ec" onclick="playVideo('https://www.youtube.com/embed/ohka1OJYIjQ','The Masterpiece','Exclusive Artwork #1')">
-      <img src="https://img.youtube.com/vi/ohka1OJYIjQ/maxresdefault.jpg" onerror="this.src='https://images.unsplash.com/photo-1579541591970-288a6090e8d7?w=700&q=80'" alt="The Masterpiece">
-      <div class="ec-body">
-        <div class="ec-num">Exclusive #1</div>
-        <div class="ec-t">The Masterpiece</div>
-        <div class="ec-sub">168 hrs · 554 Nails · 2.1km Thread</div>
-        <a class="ec-play" href="#" onclick="playVideo('https://www.youtube.com/embed/ohka1OJYIjQ','The Masterpiece','Exclusive Artwork #1');return false">▶ Watch film</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Individual descriptions -->
-  <section class="S S-dk" style="padding-top:0;border-top:1px solid rgba(244,240,232,.07)">
-    <div style="display:flex;flex-direction:column;gap:1px">
-
-      <div class="rv" style="display:grid;grid-template-columns:120px 1fr 1fr auto;gap:36px;align-items:center;padding:36px 0;border-bottom:1px solid rgba(244,240,232,.07)">
-        <span style="font-family:var(--F);font-size:52px;font-weight:300;color:rgba(244,240,232,.1)">#5</span>
-        <div><div style="font-family:var(--F);font-style:italic;font-size:26px;color:var(--paper);margin-bottom:4px">Euphoria</div><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)">Umber · Raw Sienna · Bronze</div></div>
-        <p style="font-size:13px;line-height:1.75;color:rgba(244,240,232,.45)">Let the imperfect circles guide you beyond the edges of the canvas, into a space where joy knows no bounds. <em style="color:rgba(244,240,232,.3)">Put your earphones on.</em></p>
-        <a href="#" class="btn-rust" onclick="playVideo('https://www.youtube.com/embed/gnNhsgC_Jjo','Euphoria','Exclusive Artwork #5');return false">▶ Watch</a>
-      </div>
-
-      <div class="rv" style="display:grid;grid-template-columns:120px 1fr 1fr auto;gap:36px;align-items:center;padding:36px 0;border-bottom:1px solid rgba(244,240,232,.07)">
-        <span style="font-family:var(--F);font-size:52px;font-weight:300;color:rgba(244,240,232,.1)">#4</span>
-        <div><div style="font-family:var(--F);font-style:italic;font-size:26px;color:var(--paper);margin-bottom:4px">Nirvana</div><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)">Abstract Acrylic</div></div>
-        <p style="font-size:13px;line-height:1.75;color:rgba(244,240,232,.45)">Painting is therapeutic. Every time I paint, I conclude this is it. And then — surprise, surprise! <em style="color:rgba(244,240,232,.3)">Put your earphones on.</em></p>
-        <a href="#" class="btn-rust" onclick="playVideo('https://www.youtube.com/embed/KvmILY7PJOc','Nirvana','Exclusive Artwork #4');return false">▶ Watch</a>
-      </div>
-
-      <div class="rv" style="display:grid;grid-template-columns:120px 1fr 1fr auto;gap:36px;align-items:center;padding:36px 0;border-bottom:1px solid rgba(244,240,232,.07)">
-        <span style="font-family:var(--F);font-size:52px;font-weight:300;color:rgba(244,240,232,.1)">#3</span>
-        <div><div style="font-family:var(--F);font-style:italic;font-size:26px;color:var(--paper);margin-bottom:4px">Eternity</div><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)">Abstract · Textured</div></div>
-        <p style="font-size:13px;line-height:1.75;color:rgba(244,240,232,.45)">Pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas. <em style="color:rgba(244,240,232,.3)">Earphones on.</em></p>
-        <a href="#" class="btn-rust" onclick="playVideo('https://www.youtube.com/embed/zEz0Rwnpwl8','Eternity','Exclusive Artwork #3');return false">▶ Watch</a>
-      </div>
-
-      <div class="rv" style="display:grid;grid-template-columns:120px 1fr 1fr auto;gap:36px;align-items:center;padding:36px 0;border-bottom:1px solid rgba(244,240,232,.07)">
-        <span style="font-family:var(--F);font-size:52px;font-weight:300;color:rgba(244,240,232,.1)">#2</span>
-        <div><div style="font-family:var(--F);font-style:italic;font-size:26px;color:var(--paper);margin-bottom:4px">An Epiphany</div><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)">Coffee & Acrylic · 6 hrs</div></div>
-        <p style="font-size:13px;line-height:1.75;color:rgba(244,240,232,.45)">6 Hours condensed to 2 minutes. Magic happens when a handful of Coffee blends with a mindful of Art.</p>
-        <a href="#" class="btn-rust" onclick="playVideo('https://www.youtube.com/embed/r-TGy0XkzKA','An Epiphany','Exclusive Artwork #2');return false">▶ Watch</a>
-      </div>
-
-      <div class="rv" style="display:grid;grid-template-columns:120px 1fr 1fr auto;gap:36px;align-items:center;padding:36px 0">
-        <span style="font-family:var(--F);font-size:52px;font-weight:300;color:rgba(244,240,232,.1)">#1</span>
-        <div><div style="font-family:var(--F);font-style:italic;font-size:26px;color:var(--paper);margin-bottom:4px">The Masterpiece</div><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust)">554 Nails · 2.1km Thread · 168 hrs</div></div>
-        <p style="font-size:13px;line-height:1.75;color:rgba(244,240,232,.45)">168 Hours condensed to 8 minutes. The Heisenberg you know — but in 554 nails and 2.1 km of sewing thread. Because some things are worth the effort.</p>
-        <a href="#" class="btn-rust" onclick="playVideo('https://www.youtube.com/embed/ohka1OJYIjQ','The Masterpiece','Exclusive Artwork #1');return false">▶ Watch</a>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="bridge rv">
-    <p class="bridge-q">Want to see all 14 original works? The exhibition has landscapes, monochromatic, string sculptures and <strong>more.</strong></p>
-    <a class="btn-dk" style="background:#fff;color:var(--ink);white-space:nowrap" href="#" onclick="goto('exhibition');return false">Browse the Exhibition →</a>
-  </div>
-
-</div><!-- /exclusive -->
-
-<!-- VIDEO MODAL -->
-<div class="vmodal" id="vmodal" onclick="closeVideo(event)">
-  <div class="vmodal-inner">
-    <button class="vm-close" onclick="closeVideo(null,true)">✕</button>
-    <iframe id="vframe" src="" title="Arts by Feroz" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>
-    <div class="vm-title" id="vm-title"></div>
-  </div>
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('exhibition')">Exhibition</a></li>
+      <li><a onclick="showPage('exclusive')">Exclusive</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
 </div>
 
+<!-- ======================== EXHIBITION ======================== -->
+<div id="exhibition" class="page">
+  <div class="page-header">
+    <span class="eyebrow">14 Original Works</span>
+    <h1 class="page-title">The Exhibition</h1>
+    <p class="page-subtitle">Click any work to explore its story</p>
+  </div>
 
-<!-- ══════════════════════════════════════════════════
-     ABOUT
-══════════════════════════════════════════════════ -->
-<div class="pg" id="pg-about">
+  <div class="filter-bar">
+    <button class="filter-pill active" data-filter="all" onclick="filterGallery('all', this)">All Works</button>
+    <button class="filter-pill" data-filter="Acrylic" onclick="filterGallery('Acrylic', this)">Acrylic</button>
+    <button class="filter-pill" data-filter="String Art" onclick="filterGallery('String Art', this)">String Art</button>
+    <button class="filter-pill" data-filter="Abstract" onclick="filterGallery('Abstract', this)">Abstract</button>
+  </div>
 
-  <div class="about-split">
-    <div class="about-sticky">
-      <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=900&q=80" alt="Feroz Khan at work">
-    </div>
-    <div class="about-scroll">
+  <div class="gallery-grid" id="gallery-grid"></div>
 
-      <div class="about-block rv">
-        <p class="tag">Feroz Khan</p>
-        <h3>Who <em>am I?</em></h3>
-        <p>I am Feroz Khan and I live in Bhopal, India. Right from my childhood days, creating something from scratch has always fascinated me. Be it assembling DIY Mechanics games, or gardening, or following Art shows, I have created, tinkered with and ruined countless things in the process.</p>
-        <p>But as I grew up, the lil' creative side of me picked up on paints n' brushes. Before I realized, I started painting my imagination on canvas and never looked back.</p>
-        <blockquote>"Creating something from scratch has always fascinated me."</blockquote>
-      </div>
+  <div class="bridge">
+    <span class="bridge-label">Continue exploring</span>
+    <a class="bridge-link" onclick="showPage('exclusive')">Five of these works have their own films</a>
+  </div>
 
-      <div class="about-block rv">
-        <h3>My <em>Medium</em></h3>
-        <p>Being a self-taught artist, my artworks are predominantly acrylic-based besides a few string arts. My preferred canvas size is 14"×18" with the biggest canvas used so far being 18"×24".</p>
-        <p>I use different brushes, painting techniques, toothbrushes, ice-cream sticks and in fact everything I can grab to paint my dreams. Landscape scenery alongside some abstract art is what I like to do.</p>
-        <div class="skills-grid">
-          <div class="skill-cell"><h5>Primary Medium</h5><p>Acrylic on Canvas — 14"×18" preferred</p></div>
-          <div class="skill-cell"><h5>Special Craft</h5><p>String art — nails, thread, and obsessive patience</p></div>
-          <div class="skill-cell"><h5>Tools</h5><p>Brushes, toothbrushes, ice-cream sticks</p></div>
-          <div class="skill-cell"><h5>Genres</h5><p>Landscape, abstract, monochromatic, string</p></div>
-        </div>
-      </div>
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('exclusive')">Exclusive</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
 
-      <div class="about-block rv">
-        <h3>My <em>Inspiration</em></h3>
-        <p>Being a creative thinker and a keen observer, when I visit places, I like to note the intricacies of interaction between humans and their environment. This acts as an inspiration for everything I do in life.</p>
-        <p>All my artworks convey a human attribute. Some reflect ease, others exhibit effort while a few manifest motivation.</p>
-        <blockquote>"Some reflect ease, others exhibit effort while a few manifest motivation."</blockquote>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
-          <a class="btn-dk" href="#" onclick="goto('exhibition');return false">See my work →</a>
-          <a class="btn-lt" href="#" onclick="goto('reviews');return false">Read reviews</a>
-        </div>
-      </div>
+<!-- ======================== EXCLUSIVE ======================== -->
+<div id="exclusive" class="page">
+  <div class="page-header">
+    <span class="eyebrow">Time-Lapse Films</span>
+    <h1 class="page-title">Exclusive Series</h1>
+    <p class="page-subtitle">Put your earphones on</p>
+  </div>
 
+  <div class="exclusive-grid" id="exclusive-grid"></div>
+
+  <div class="exclusive-editorial">
+    <p class="exclusive-editorial-title">The stories behind the films</p>
+    <div id="exclusive-editorial-list"></div>
+  </div>
+
+  <div class="bridge">
+    <span class="bridge-label">See the full collection</span>
+    <a class="bridge-link" onclick="showPage('exhibition')">Back to the Exhibition</a>
+  </div>
+
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('exhibition')">Exhibition</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ======================== ABOUT ======================== -->
+<div id="about" class="page">
+  <div class="page-header">
+    <span class="eyebrow">The Artist</span>
+    <h1 class="page-title">Feroz Khan</h1>
+    <p class="page-subtitle">Bhopal, India</p>
+  </div>
+
+  <div class="about-section">
+    <div class="about-layout">
+      <div class="about-section-label">Background</div>
+      <p class="about-body">I am Feroz Khan and I live in Bhopal, India. Right from my childhood days, creating something from scratch has always fascinated me. Be it assembling DIY Mechanics games, or gardening, or following Art shows, I have created, tinkered with and ruined countless things in the process. But as I grew up, the lil' creative side of me picked up on paints n' brushes. Before I realized, I started painting my imagination on canvas and never looked back.</p>
     </div>
   </div>
 
-  <div class="bridge rv">
-    <p class="bridge-q">Want to know what people say about the work? <strong>The word around town</strong> is pretty good.</p>
-    <a class="btn-dk" style="background:#fff;color:var(--ink);white-space:nowrap" href="#" onclick="goto('reviews');return false">See Reviews →</a>
+  <div class="about-section">
+    <div class="about-layout">
+      <div class="about-section-label">Medium</div>
+      <p class="about-body">Being a self-taught artist, my artworks are predominantly acrylic-based besides a few string arts. My preferred canvas size is 14″×18″ with the biggest canvas used so far being 18″×24″. I use different brushes, painting techniques, toothbrushes, ice-cream sticks and in fact everything I can grab to paint my dreams. Landscape scenery alongside some abstract art is what I like to do.</p>
+    </div>
   </div>
 
-</div><!-- /about -->
+  <div class="about-section">
+    <div class="about-layout">
+      <div class="about-section-label">Inspiration</div>
+      <p class="about-body">Being a creative thinker and a keen observer, when I visit places, I like to note the intricacies of interaction between humans and their environment. This acts as an inspiration for everything I do in life. All my artworks convey a human attribute. Some reflect ease, others exhibit effort while a few manifest motivation.</p>
+    </div>
+  </div>
 
+  <div class="bridge">
+    <span class="bridge-label">Hear from collectors</span>
+    <a class="bridge-link" onclick="showPage('reviews')">What people are saying</a>
+  </div>
 
-<!-- ══════════════════════════════════════════════════
-     REVIEWS
-══════════════════════════════════════════════════ -->
-<div class="pg" id="pg-reviews">
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('exhibition')">Exhibition</a></li>
+      <li><a onclick="showPage('exclusive')">Exclusive</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
 
-  <div class="reviews-hero rv">
+<!-- ======================== REVIEWS ======================== -->
+<div id="reviews" class="page">
+  <div class="page-header">
+    <span class="eyebrow">Collector Voices</span>
+    <h1 class="page-title">What's the word<br>around town?</h1>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <p class="review-quote">Feroz's work doesn't just hang on the wall — it lives there. Chaos and the Calm brought something alive in my living room that I hadn't expected.</p>
+      <div class="review-meta">
+        <span class="review-name">Priya Sharma</span>
+        <span class="review-city">Mumbai</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <p class="review-quote">The Masterpiece was worth every rupee. You can feel the hours in it — not as effort but as devotion. It's unlike anything I own.</p>
+      <div class="review-meta">
+        <span class="review-name">Anshul Verma</span>
+        <span class="review-city">Delhi</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <p class="review-quote">I watched the Nirvana time-lapse and ordered the print the same evening. The process is as meditative as the result.</p>
+      <div class="review-meta">
+        <span class="review-name">Tanvi Mehta</span>
+        <span class="review-city">Bangalore</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <p class="review-quote">Eternity changed how I think about abstract art. I come back to it daily and it reads differently every time.</p>
+      <div class="review-meta">
+        <span class="review-name">Rahul Joshi</span>
+        <span class="review-city">Pune</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <p class="review-quote">Serendipity made me want to sit in that painting and order that hazelnut latte. Feroz has a rare gift for transporting you.</p>
+      <div class="review-meta">
+        <span class="review-name">Neha Agarwal</span>
+        <span class="review-city">Hyderabad</span>
+      </div>
+    </div>
+    <div class="review-card">
+      <p class="review-quote">A self-taught artist with trained eyes. Every brushstroke feels deliberate yet free. I commission only Feroz now.</p>
+      <div class="review-meta">
+        <span class="review-name">Vikram Singh</span>
+        <span class="review-city">Bhopal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bridge" style="text-align:center; padding: 4rem 2rem;">
+    <span class="bridge-label">Acquired something? Commission something?</span>
+    <a class="bridge-link" onclick="showPage('contact')">Start the conversation</a>
+  </div>
+
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('exhibition')">Exhibition</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ======================== CONTACT ======================== -->
+<div id="contact" class="page">
+  <div class="page-header">
+    <span class="eyebrow">Let's Connect</span>
+    <h1 class="page-title">Say hello</h1>
+  </div>
+
+  <div class="contact-layout">
     <div>
-      <p class="tag">Community</p>
-      <div class="rh-big">What's the<br>word around<br><em>town?</em></div>
+      <h2 class="contact-headline">An artwork begins<br>with a conversation.</h2>
+      <p class="contact-intro">Whether you're drawn to something in the Exhibition, interested in a commission, or simply want to talk about art — I'd love to hear from you.</p>
+
+      <div class="contact-detail">
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Location</span>
+          <span class="contact-detail-val">Bhopal, Madhya Pradesh, India</span>
+        </div>
+        <div class="contact-detail-item">
+          <span class="contact-detail-label">Email</span>
+          <span class="contact-detail-val">ferozfineart@gmail.com</span>
+        </div>
+      </div>
+
+      <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-btn" target="_blank">Chat on WhatsApp</a>
     </div>
+
     <div>
-      <p class="rh-sub">People who've experienced the work — in person, through the films, or in their own homes. Here's what they say.</p>
-      <div style="margin-top:28px">
-        <a class="btn-rust" href="#" onclick="goto('contact');return false">Commission a piece →</a>
+      <div class="contact-form" id="contact-form">
+        <div class="form-field">
+          <label class="form-label">Name</label>
+          <input type="text" id="f-name" placeholder="Your name">
+          <span class="form-error" id="err-name">Please enter your name</span>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input type="email" id="f-email" placeholder="your@email.com">
+          <span class="form-error" id="err-email">Please enter a valid email</span>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Subject</label>
+          <input type="text" id="f-subject" placeholder="Commission / Inquiry / Just saying hello">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Message</label>
+          <textarea id="f-message" rows="5" placeholder="Tell me what's on your mind…"></textarea>
+          <span class="form-error" id="err-message">Please write a message</span>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send Message</button>
+      </div>
+      <div class="form-success" id="form-success">
+        <p class="form-success-text">Thank you — I'll be in touch soon.</p>
       </div>
     </div>
   </div>
 
-  <div class="reviews-tape">
-    <div class="rv-card rv">
-      <div class="rv-author">Priya S.<br><span style="color:var(--rust-dk);font-size:9px">Mumbai</span></div>
-      <div class="rv-text">"The Masterpiece absolutely blew my mind. 554 nails and 2.1 km of thread — the patience and precision is completely unreal."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-    <div class="rv-card rv">
-      <div class="rv-author">Arjun M.<br><span style="color:var(--rust-dk);font-size:9px">Bhopal</span></div>
-      <div class="rv-text">"Nirvana made me stop and actually breathe. That piece has a stillness to it that is almost meditative."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-    <div class="rv-card rv">
-      <div class="rv-author">Sana K.<br><span style="color:var(--rust-dk);font-size:9px">Delhi</span></div>
-      <div class="rv-text">"Chaos and the Calm is exactly what it says. The sunset feels alive. I keep finding new birds every time I look at it."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-    <div class="rv-card rv">
-      <div class="rv-author">Rahul T.<br><span style="color:var(--rust-dk);font-size:9px">Pune</span></div>
-      <div class="rv-text">"Euphoria with earphones on is a full sensory experience. I've watched the film four times. The colour palette is extraordinary."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-    <div class="rv-card rv">
-      <div class="rv-author">Meera V.<br><span style="color:var(--rust-dk);font-size:9px">Indore</span></div>
-      <div class="rv-text">"An Epiphany painted with coffee — that's the most original thing I've seen in a long time."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-    <div class="rv-card rv">
-      <div class="rv-author">Kabir D.<br><span style="color:var(--rust-dk);font-size:9px">Bengaluru</span></div>
-      <div class="rv-text">"What strikes me is how personal it feels. Every painting has a story and he makes you feel like you lived it."</div>
-      <div class="rv-stars">★★★★★</div>
-    </div>
-  </div>
+  <footer>
+    <span class="footer-brand">Feroz Khan</span>
+    <span class="footer-meta">Bhopal, India &nbsp;·&nbsp; © 2025</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="showPage('exhibition')">Exhibition</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('reviews')">Reviews</a></li>
+    </ul>
+  </footer>
+</div>
 
-  <div class="bridge rv">
-    <p class="bridge-q">Liked what you read? Have a work in mind — something <strong>made just for you.</strong></p>
-    <a class="btn-dk" style="background:#fff;color:var(--ink);white-space:nowrap" href="#" onclick="goto('contact');return false">Get in Touch →</a>
-  </div>
-
-</div><!-- /reviews -->
-
-
-<!-- ══════════════════════════════════════════════════
-     CONTACT
-══════════════════════════════════════════════════ -->
-<div class="pg" id="pg-contact">
-  <div class="contact-wrap">
-
-    <div class="contact-left rv">
-      <div>
-        <p class="tag" style="color:var(--rust)">Let's talk</p>
-        <h2>Get<br>in<br><em>touch!</em></h2>
-        <p>For commissions, collaborations, or just to say hello. I love hearing from people who connect with the work.</p>
+<!-- ======================== LIGHTBOX ======================== -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork detail">
+  <button class="lightbox-close" onclick="closeLightbox()">Close ×</button>
+  <div class="lightbox-inner">
+    <div class="lightbox-img-wrap">
+      <img id="lb-img" src="" alt="">
+    </div>
+    <div class="lightbox-info">
+      <span class="lightbox-medium" id="lb-medium"></span>
+      <h2 class="lightbox-name" id="lb-name"></h2>
+      <p class="lightbox-story" id="lb-story"></p>
+      <div class="lightbox-nav">
+        <button onclick="lbNav(-1)">← Prev</button>
+        <button onclick="lbNav(1)">Next →</button>
       </div>
-      <div class="contact-details">
-        <div class="cd-item">
-          <div class="cd-icon">📍</div>
-          <div class="cd-txt"><p>Location</p><p>Bhopal, India</p></div>
-        </div>
-        <div class="cd-item">
-          <div class="cd-icon">✉</div>
-          <div class="cd-txt"><p>Email</p><p>hello@artsbyferoz.com</p></div>
-        </div>
-        <div class="cd-item" style="border-bottom:1px solid rgba(244,240,232,.08);padding-bottom:20px">
-          <div class="cd-icon">🌐</div>
-          <div class="cd-txt"><p>Social</p><p>@artsbyferoz</p></div>
-        </div>
-        <div style="margin-top:24px">
-          <a class="wa-btn" href="https://wa.me/919999999999" target="_blank">💬 Message on WhatsApp</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="contact-right rv2">
-      <h3>Send a <em>message</em></h3>
-      <div class="frow">
-        <div class="field"><label>Name</label><input type="text" id="fn" placeholder="Your name"></div>
-        <div class="field"><label>Email</label><input type="email" id="fe" placeholder="you@example.com"></div>
-      </div>
-      <div class="field"><label>What's on your mind?</label><input type="text" id="fs" placeholder="Commission, collaboration, press..."></div>
-      <div class="field"><label>Message</label><textarea id="fm" placeholder="Tell me about your vision, a piece you loved, or just say hi..."></textarea></div>
-      <button class="btn-dk" style="width:100%;justify-content:center;margin-top:2px;font-size:11px" onclick="doSend()">Send Message →</button>
-      <p id="fsuccess" style="display:none;margin-top:16px;font-size:13px;color:var(--rust-dk);letter-spacing:.04em">✓ Sent! I'll be in touch within 48 hours.</p>
-      <div class="wa-wrap">
-        <a class="wa-btn" href="https://wa.me/919999999999" target="_blank">💬 WhatsApp</a>
-        <p class="wa-note">Prefer WhatsApp? Reach out directly — usually faster for quick chats.</p>
-      </div>
-    </div>
-
-  </div>
-</div><!-- /contact -->
-
-
-<!-- ══════════════════════════════════════════════════
-     LIGHTBOX
-══════════════════════════════════════════════════ -->
-<div id="lb" onclick="closeLb(event)">
-  <button id="lb-close" onclick="closeLb(null,true)">✕</button>
-  <div class="lb-in">
-    <img class="lb-img" id="lb-img" src="" alt="">
-    <div class="lb-txt">
-      <div class="lb-num" id="lb-num"></div>
-      <div class="lb-tag" id="lb-tag"></div>
-      <div class="lb-title" id="lb-title"></div>
-      <div class="lb-desc" id="lb-desc"></div>
-      <div class="lb-med" id="lb-med"></div>
-      <div class="lb-nav">
-        <button class="lb-arr" onclick="shiftLb(-1)">←</button>
-        <button class="lb-arr" onclick="shiftLb(1)">→</button>
-      </div>
-      <div style="margin-top:20px">
-        <a class="tlink" style="color:var(--rust)" href="#" onclick="closeLb(null,true);goto('contact');return false">Enquire about this work →</a>
-      </div>
+      <p class="lightbox-counter" id="lb-counter"></p>
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════
-     FOOTER
-══════════════════════════════════════════════════ -->
-<footer>
-  <div class="ft">
-    <div>
-      <div class="ft-brand">Arts by Feroz<small>Original Artworks</small></div>
-      <p class="ft-brand p">A self-taught artist from Bhopal, India — painting landscapes, abstracts, and string sculptures since 2020.</p>
-    </div>
-    <div class="ft-nav">
-      <h6>Navigate</h6>
-      <a href="#" onclick="goto('home');return false">Home</a>
-      <a href="#" onclick="goto('exhibition');return false">Exhibition</a>
-      <a href="#" onclick="goto('exclusive');return false">Exclusive Series</a>
-      <a href="#" onclick="goto('about');return false">About Me</a>
-      <a href="#" onclick="goto('reviews');return false">Reviews</a>
-      <a href="#" onclick="goto('contact');return false">Contact</a>
-    </div>
-    <div class="ft-loc">
-      <p>Bhopal,<br>India</p>
-      <p style="margin-top:12px">Arts by Feroz © 2024</p>
-    </div>
+<!-- ======================== VIDEO MODAL ======================== -->
+<div class="video-modal-overlay" id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="video-modal-inner">
+    <iframe id="video-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <button class="video-modal-close" onclick="closeVideo()">Close ×</button>
   </div>
-  <div class="ft-bot">
-    <span>Arts by Feroz © 2024 · All rights reserved</span>
-    <span>Bhopal, India · hello@artsbyferoz.com</span>
-  </div>
-</footer>
-
+</div>
 
 <script>
-/*────────────────────────────────────────────────
-  CURSOR
-────────────────────────────────────────────────*/
-const C1=document.getElementById('C1'),C2=document.getElementById('C2');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;C1.style.left=mx+'px';C1.style.top=my+'px'});
-(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;C2.style.left=rx+'px';C2.style.top=ry+'px';requestAnimationFrame(anim)})();
-document.querySelectorAll('a,button,.art,.ec,.feat-card,.intro-cell,.rv-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('H'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('H'));
-});
-
-/*────────────────────────────────────────────────
-  PAGE NAVIGATION
-────────────────────────────────────────────────*/
-function goto(id){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.getElementById('pg-'+id).classList.add('on');
-  document.querySelectorAll('.nl a').forEach(a=>a.classList.toggle('on',a.dataset.p===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-  document.getElementById('nl').classList.remove('on');
-  // re-observe reveals on the new page
-  setTimeout(()=>{
-    document.querySelectorAll('#pg-'+id+' .rv,#pg-'+id+' .rv2,#pg-'+id+' .rv3').forEach(el=>{
-      el.classList.remove('vis');
-      observer.observe(el);
-    });
-  },30);
-}
-
-/*────────────────────────────────────────────────
-  MOBILE NAV
-────────────────────────────────────────────────*/
-document.getElementById('burger').addEventListener('click',()=>{
-  document.getElementById('nl').classList.toggle('on');
-});
-
-/*────────────────────────────────────────────────
-  SCROLL REVEAL
-────────────────────────────────────────────────*/
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target)}});
-},{threshold:.08});
-document.querySelectorAll('.rv,.rv2,.rv3').forEach(el=>observer.observe(el));
-
-/*────────────────────────────────────────────────
-  GALLERY FILTER
-────────────────────────────────────────────────*/
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
-    btn.classList.add('on');
-    const f=btn.dataset.filter;
-    document.querySelectorAll('.art').forEach(art=>{
-      if(f==='all'||art.dataset.cat===f){art.style.display='';art.style.opacity='1'}
-      else{art.style.opacity='0.15';art.style.pointerEvents='none';
-        setTimeout(()=>{if(btn.classList.contains('on'))art.style.pointerEvents='none'},300);}
-    });
-    // reset pointer events on visible
-    if(f!=='all') document.querySelectorAll(`.art[data-cat="${f}"]`).forEach(a=>a.style.pointerEvents='');
-    else document.querySelectorAll('.art').forEach(a=>{a.style.opacity='1';a.style.pointerEvents=''});
-  });
-});
-
-/*────────────────────────────────────────────────
-  LIGHTBOX
-────────────────────────────────────────────────*/
-const ARTS=[
-  {n:'01',t:'Chaos and the Calm',m:'Acrylic on Canvas',d:"Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day."},
-  {n:'02',t:'Connect the Nails',m:'String Art',d:"Made using a brown colored canvas, uncountable nails and a long spindle of white thread. This craft piece speaks for something more than a mere leafless tree. Can you guess?"},
-  {n:'03',t:'Misty Blue',m:'Acrylic on Canvas',d:"Lost in the midst of endless bliss, I feel tethered to the mists of divine blue."},
-  {n:'04',t:'Just Hanging Around',m:'Acrylic on Canvas',d:"Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?"},
-  {n:'05',t:'Awakening',m:'Abstract · Acrylic',d:"This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience."},
-  {n:'06',t:'Serendipity',m:'Acrylic on Canvas',d:"How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations."},
-  {n:'07',t:"Shades n' Silhouettes",m:'Monochromatic · Acrylic',d:"Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it."},
-  {n:'08',t:'The Other World',m:'Acrylic on Canvas',d:"This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours."},
-  {n:'09',t:'The Time Zones',m:'Acrylic on Canvas',d:"One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time."},
-  {n:'10',t:'An Epiphany',m:'Coffee & Acrylic',d:"Be it morning coffee or brunch coffee, I'm always up. So while sipping my favourite countrybean, I thought — why not make my next artwork with this coffee itself?"},
-  {n:'11',t:'Eternity',m:'Abstract Acrylic · Textured',d:"Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas."},
-  {n:'12',t:'Nirvana',m:'Abstract Acrylic',d:"In Buddhism, Nirvana is a transcendent state — the extinction of desire, hatred, and ignorance. Literally, 'becoming extinguished' as when a flame is blown out."},
-  {n:'13',t:'The Masterpiece',m:'String Art · 554 Nails · 2.1km Thread',d:"168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort."},
-  {n:'14',t:'Euphoria',m:'Acrylic · Umber & Bronze',d:"The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit. Bronze lends timelessness, echoing the ancient roots of euphoria."},
+const artworks = [
+  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/1.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
+  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "images/2.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
+  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/4.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
+  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/5.jpg", story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
+  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "images/6.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
+  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/7.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
+  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "images/8.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
+  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/9.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
+  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/10.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
+  { name: "An Epiphany", medium: "Coffee & Acrylic", filter: "Acrylic", img: "images/as.jpg", story: "While sipping my favourite countrybean coffee, I thought — why not make my next artwork with this coffee itself?" },
+  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
+  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "images/Nirvana.jpg", story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance — becoming extinguished, as when a flame is blown out." },
+  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "images/photo_2024-08-10_02-21-04.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
+  { name: "Euphoria", medium: "Acrylic, Umber & Bronze palette", filter: "Acrylic", img: "images/11.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
 ];
-let curLb=0;
-function openLb(i){
-  curLb=i;
-  const arts=document.querySelectorAll('.art');
-  const img=arts[i]?.querySelector('img')?.src||'';
-  document.getElementById('lb-img').src=img;
-  document.getElementById('lb-num').textContent=ARTS[i].n+' / '+ARTS.length;
-  document.getElementById('lb-tag').textContent=ARTS[i].m;
-  document.getElementById('lb-title').textContent=ARTS[i].t;
-  document.getElementById('lb-desc').textContent=ARTS[i].d;
-  document.getElementById('lb-med').textContent=ARTS[i].m;
-  document.getElementById('lb').classList.add('on');
-  document.body.style.overflow='hidden';
-}
-function shiftLb(d){
-  curLb=(curLb+d+ARTS.length)%ARTS.length;
-  openLb(curLb);
-}
-function closeLb(e,force){
-  if(force||(e&&e.target===document.getElementById('lb'))){
-    document.getElementById('lb').classList.remove('on');
-    document.body.style.overflow='';
-  }
+
+const exclusiveSeries = [
+  { num: "#5", name: "Euphoria", medium: "Acrylic, Umber & Bronze palette", videoId: "gnNhsgC_Jjo", desc: "Take a moment, immerse yourself in the boundless energy of Euphoria, and let the imperfect circles guide you beyond the edges of the canvas, into a space where joy knows no bounds. Put your earphones on." },
+  { num: "#4", name: "Nirvana", medium: "Abstract Acrylic", videoId: "KvmILY7PJOc", desc: "Painting is therapeutic. Every time I paint, I conclude this is it. This is the best I could possibly get. And then — surprise, surprise! Put your earphones on." },
+  { num: "#3", name: "Eternity", medium: "Abstract Acrylic, Textured", videoId: "zEz0Rwnpwl8", desc: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas. Put your earphones on." },
+  { num: "#2", name: "An Epiphany", medium: "Coffee & Acrylic", videoId: "r-TGy0XkzKA", desc: "6 Hours condensed to 2 minutes. Magic happens when a handful of Coffee blends with a mindful of Art." },
+  { num: "#1", name: "The Masterpiece", medium: "String Art", videoId: "ohka1OJYIjQ", desc: "168 Hours condensed to 8 minutes. 168 Hours. 2.1 Km of Sewing Thread. 554 Nails. The Heisenberg string art — because some things are worth the effort." }
+];
+
+// Build gallery
+const galleryGrid = document.getElementById('gallery-grid');
+artworks.forEach((art, i) => {
+  const el = document.createElement('div');
+  el.className = 'gallery-item';
+  el.dataset.filter = art.filter;
+  el.dataset.index = i;
+  el.onclick = () => openLightbox(i);
+  el.innerHTML = `
+    <img src="${art.img}" alt="${art.name}" loading="lazy">
+    <div class="gallery-item-info">
+      <span class="gallery-item-name">${art.name}</span>
+      <span class="gallery-item-medium">${art.medium}</span>
+    </div>`;
+  galleryGrid.appendChild(el);
+});
+
+// Build exclusive grid
+const excGrid = document.getElementById('exclusive-grid');
+exclusiveSeries.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'exclusive-card';
+  el.onclick = () => openVideo(s.videoId);
+  el.innerHTML = `
+    <div class="exclusive-thumb">
+      <img src="https://img.youtube.com/vi/${s.videoId}/maxresdefault.jpg" alt="${s.name}" loading="lazy">
+      <div class="play-btn">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+          <polygon points="19,15 35,24 19,33" fill="rgba(255,255,255,0.95)"/>
+        </svg>
+      </div>
+    </div>
+    <div class="exclusive-card-body">
+      <span class="exclusive-num">${s.num}</span>
+      <span class="exclusive-card-name">${s.name}</span>
+      <span class="exclusive-card-medium">${s.medium}</span>
+    </div>`;
+  excGrid.appendChild(el);
+});
+
+// Build editorial list
+const editList = document.getElementById('exclusive-editorial-list');
+exclusiveSeries.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'editorial-item';
+  el.innerHTML = `
+    <div class="editorial-item-header">
+      <span class="editorial-item-num">${s.num}</span>
+      <span class="editorial-item-name">${s.name}</span>
+    </div>
+    <p class="editorial-item-body">${s.desc}</p>`;
+  editList.appendChild(el);
+});
+
+// PAGE NAVIGATION
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === id);
+  });
+  window.scrollTo(0, 0);
 }
 
-/*────────────────────────────────────────────────
-  VIDEO MODAL
-────────────────────────────────────────────────*/
-function playVideo(src,title,sub){
-  document.getElementById('vframe').src=src+'?autoplay=1&rel=0';
-  document.getElementById('vm-title').textContent=title+' — '+sub;
-  document.getElementById('vmodal').classList.add('on');
-  document.body.style.overflow='hidden';
-}
-function closeVideo(e,force){
-  if(force||(e&&e.target===document.getElementById('vmodal'))){
-    document.getElementById('vframe').src='';
-    document.getElementById('vmodal').classList.remove('on');
-    document.body.style.overflow='';
-  }
+// FILTER
+function filterGallery(filter, btn) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (filter === 'all') {
+      item.dataset.hidden = 'false';
+      item.style.display = '';
+    } else {
+      const match = item.dataset.filter === filter ||
+        (filter === 'Abstract' && item.dataset.filter === 'Abstract') ||
+        (filter === 'Acrylic' && item.dataset.filter === 'Acrylic') ||
+        (filter === 'String Art' && item.dataset.filter === 'String Art');
+      item.style.display = match ? '' : 'none';
+    }
+  });
 }
 
-/*────────────────────────────────────────────────
-  KEYBOARD
-────────────────────────────────────────────────*/
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeLb(null,true);closeVideo(null,true)}
-  if(document.getElementById('lb').classList.contains('on')){
-    if(e.key==='ArrowRight')shiftLb(1);
-    if(e.key==='ArrowLeft')shiftLb(-1);
+// LIGHTBOX
+let currentLbIndex = 0;
+let visibleItems = [];
+
+function buildVisibleList() {
+  visibleItems = [];
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (item.style.display !== 'none') {
+      visibleItems.push(parseInt(item.dataset.index));
+    }
+  });
+}
+
+function openLightbox(artIndex) {
+  buildVisibleList();
+  const pos = visibleItems.indexOf(artIndex);
+  currentLbIndex = pos >= 0 ? pos : 0;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openLightboxByName(name) {
+  showPage('exhibition');
+  setTimeout(() => {
+    const idx = artworks.findIndex(a => a.name === name);
+    if (idx >= 0) openLightbox(idx);
+  }, 50);
+}
+
+function renderLightbox() {
+  const art = artworks[visibleItems[currentLbIndex]];
+  document.getElementById('lb-img').src = art.img;
+  document.getElementById('lb-img').alt = art.name;
+  document.getElementById('lb-name').textContent = art.name;
+  document.getElementById('lb-medium').textContent = art.medium;
+  document.getElementById('lb-story').textContent = art.story;
+  document.getElementById('lb-counter').textContent = `${currentLbIndex + 1} / ${visibleItems.length}`;
+}
+
+function lbNav(dir) {
+  currentLbIndex = (currentLbIndex + dir + visibleItems.length) % visibleItems.length;
+  renderLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// VIDEO MODAL
+function openVideo(videoId) {
+  const modal = document.getElementById('video-modal');
+  document.getElementById('video-iframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideo() {
+  document.getElementById('video-modal').classList.remove('open');
+  document.getElementById('video-iframe').src = '';
+  document.body.style.overflow = '';
+}
+
+// KEYBOARD
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  const vm = document.getElementById('video-modal');
+  if (lb.classList.contains('open')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft') lbNav(-1);
+  }
+  if (vm.classList.contains('open')) {
+    if (e.key === 'Escape') closeVideo();
   }
 });
 
-/*────────────────────────────────────────────────
-  CONTACT FORM
-────────────────────────────────────────────────*/
-function doSend(){
-  const n=document.getElementById('fn').value.trim();
-  const e=document.getElementById('fe').value.trim();
-  const m=document.getElementById('fm').value.trim();
-  if(!n||!e||!m){alert('Please fill in your name, email, and message.');return}
-  document.getElementById('fsuccess').style.display='block';
-  ['fn','fe','fs','fm'].forEach(id=>document.getElementById(id).value='');
-}
+// Close on overlay click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+document.getElementById('video-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideo();
+});
 
-// Initial reveal trigger
-setTimeout(()=>{
-  document.querySelectorAll('#pg-home .rv,#pg-home .rv2,#pg-home .rv3').forEach(el=>observer.observe(el));
-},100);
+// CONTACT FORM
+function submitForm() {
+  let valid = true;
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const msg = document.getElementById('f-message').value.trim();
+
+  document.getElementById('err-name').style.display = 'none';
+  document.getElementById('err-email').style.display = 'none';
+  document.getElementById('err-message').style.display = 'none';
+
+  if (!name) { document.getElementById('err-name').style.display = 'block'; valid = false; }
+  if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; valid = false; }
+  if (!msg) { document.getElementById('err-message').style.display = 'block'; valid = false; }
+
+  if (valid) {
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+}
 </script>
 </body>
 </html>
