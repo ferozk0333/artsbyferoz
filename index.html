@@ -604,20 +604,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 </div>
 
 <script>
-/* ─── BASE PATH (works locally AND on GitHub Pages subfolder) ─── */
-const basePath = (function() {
-  const path = window.location.pathname;
-  const parts = path.split('/').filter(Boolean);
-  // If served from a subfolder like /artsbyferoz/, include it
-  if (parts.length > 0 && !parts[parts.length-1].includes('.')) {
-    return '/' + parts.join('/') + '/images/';
-  }
-  // Strip filename if present
-  const dir = path.substring(0, path.lastIndexOf('/') + 1);
-  return dir + 'images/';
-})();
-
-function img(file) { return basePath + file; }
+/* ─── IMAGE PATHS ─── */
+function img(file) { return './images/' + file; }
 
 /* ─── DATA ─── */
 const artworks = [
