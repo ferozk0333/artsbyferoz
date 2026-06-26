@@ -144,7 +144,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 /* ======================== LIGHTBOX ======================== */
 .lightbox-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(253,246,236,0.98); align-items: center; justify-content: center; }
 .lightbox-overlay.open { display: flex; }
-.lightbox-inner { display: flex; align-items: center; max-width: 1300px; width: 98%; height: 92vh; gap: 2rem; }
+.lightbox-inner { display: flex; align-items: center; max-width: 1300px; width: 98%; height: 78vh; gap: 2rem; }
 .lightbox-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 1.5rem 0; height: 100%; }
 .lightbox-img-wrap img { max-width: 110%; max-height: 99vh; object-fit: contain; display: block; }
 .lightbox-info { width: 260px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; padding: 2rem 0; height: 100%; }
@@ -342,11 +342,11 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   .exclusive-card-name { font-size: 1.1rem; }
 
   /* ESSAY MODAL */
-  .essay-modal-overlay { align-items: flex-end; }
-  .essay-modal-inner { flex-direction: column; width: 100%; max-height: 92vh; border-radius: 12px 12px 0 0; overflow: hidden; }
-  .essay-video-col iframe { aspect-ratio: 16/9; width: 100%; }
-  .essay-text-col { width: 100%; max-height: 40vh; padding: 1.25rem; }
-  .essay-close { top: 0.75rem; right: 1rem; }
+  .essay-modal-overlay { align-items: flex-start; padding-top: 0; }
+  .essay-modal-inner { flex-direction: column; width: 100%; height: 100vh; max-height: 100vh; border-radius: 0; overflow-y: auto; }
+  .essay-video-col iframe { aspect-ratio: 16/9; width: 100%; position: sticky; top: 0; z-index: 1; }
+  .essay-text-col { width: 100%; max-height: none; padding: 1.25rem; flex: 1; }
+  .essay-close { top: 0.75rem; right: 1rem; color: rgba(255,255,255,0.8); }
 
   /* ABOUT */
   .about-section { padding: 2.5rem 1.25rem; }
@@ -708,7 +708,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   <button class="essay-close" onclick="closeEssay()">Close &times;</button>
   <div class="essay-modal-inner">
     <div class="essay-video-col">
-      <iframe id="essay-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="essay-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen muted playsinline></iframe>
       <div class="essay-video-meta">
         <div class="essay-video-title-block">
           <span class="essay-num" id="essay-num"></span>
@@ -986,7 +986,7 @@ function closeLightbox() {
 
 /* ─── ESSAY MODAL ─── */
 function openEssay(s) {
-  document.getElementById('essay-iframe').src = 'https://www.youtube.com/embed/' + s.videoId + '?autoplay=1';
+  document.getElementById('essay-iframe').src = 'https://www.youtube.com/embed/' + s.videoId + '?autoplay=1&mute=1&playsinline=1';
   document.getElementById('essay-num').textContent = s.num;
   document.getElementById('essay-title').textContent = s.name;
   document.getElementById('essay-medium-text').textContent = s.medium;
@@ -1040,8 +1040,8 @@ document.getElementById('essay-modal').addEventListener('click', function(e) { i
       touchEndY = e.changedTouches[0].screenY;
       const dx = touchEndX - touchStartX;
       const dy = touchEndY - touchStartY;
-      // Pull down to close: swipe down > 80px and more vertical than horizontal
-      if (dy > 80 && Math.abs(dy) > Math.abs(dx)) { onDown && onDown(); return; }
+      // Swipe up OR down to close: > 60px vertical and more vertical than horizontal
+      if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) { onDown && onDown(); return; }
       // Horizontal swipe: must be > 50px and more horizontal than vertical
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
         if (dx < 0) onLeft && onLeft();
