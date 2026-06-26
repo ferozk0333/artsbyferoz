@@ -67,8 +67,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 /* ======================== HOME ======================== */
 #home .hero { padding: 5rem 2rem 3.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
 .hero-name { font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 6rem); font-weight: 300; letter-spacing: 0.12em; line-height: 1; color: var(--ink); margin-bottom: 0.5rem; }
-.hero-tagline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.6; margin-bottom: 2.5rem; font-weight: 400; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-.hero-nav-cards { display: flex; gap: 1px; margin-top: 0; border: 1px solid var(--divider-strong); background: var(--divider); }
+.hero-tagline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.6; margin-top: 0.9rem; margin-bottom: 2.5rem; font-weight: 400; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.hero-nav-cards { display: flex; gap: 1px; margin-top: 0; border: 1px solid var(--divider-strong); background: var(--divider); max-width: 900px; width: 100%; }
 .hero-nav-card { flex: 1; padding: 2rem 1.5rem; text-align: left; cursor: pointer; transition: background 0.25s; border-right: 1px solid var(--divider-strong); background: var(--bg); }
 .hero-nav-card:last-child { border-right: none; }
 .hero-nav-card:hover { background: var(--bg-warm); }
@@ -604,22 +604,37 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 </div>
 
 <script>
+/* ─── BASE PATH (works locally AND on GitHub Pages subfolder) ─── */
+const basePath = (function() {
+  const path = window.location.pathname;
+  const parts = path.split('/').filter(Boolean);
+  // If served from a subfolder like /artsbyferoz/, include it
+  if (parts.length > 0 && !parts[parts.length-1].includes('.')) {
+    return '/' + parts.join('/') + '/images/';
+  }
+  // Strip filename if present
+  const dir = path.substring(0, path.lastIndexOf('/') + 1);
+  return dir + 'images/';
+})();
+
+function img(file) { return basePath + file; }
+
 /* ─── DATA ─── */
 const artworks = [
-  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/1.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
-  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "images/2.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
-  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/4.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
-  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/5.jpg", story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
-  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "images/6.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
-  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/7.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
-  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "images/8.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
-  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/9.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
-  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/10.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
-  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: "images/as.jpg", story: "While sipping my favourite countrybean coffee, I thought: why not make my next artwork with this coffee itself?" },
-  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
-  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "images/Nirvana.jpg", story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance, becoming extinguished, as when a flame is blown out." },
-  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "images/photo_2024-08-10_02-21-04.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
-  { name: "Euphoria", medium: "Acrylic, Umber and Bronze palette", filter: "Acrylic", img: "images/11.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
+  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("1.jpg"), story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
+  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: img("2.jpg"), story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
+  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("4.jpg"), story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
+  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("5.jpg"), story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
+  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: img("6.jpg"), story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
+  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("7.jpg"), story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
+  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: img("8.jpg"), story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
+  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("9.jpg"), story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
+  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: img("10.jpg"), story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
+  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: img("as.jpg"), story: "While sipping my favourite countrybean coffee, I thought: why not make my next artwork with this coffee itself?" },
+  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: img("Eternity_JPG.jpg"), story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
+  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: img("Nirvana.jpg"), story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance, becoming extinguished, as when a flame is blown out." },
+  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: img("photo_2024-08-10_02-21-04.jpg"), story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
+  { name: "Euphoria", medium: "Acrylic, Umber and Bronze palette", filter: "Acrylic", img: img("11.jpg"), story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
 ];
 
 const exclusiveSeries = [
@@ -670,9 +685,9 @@ allForCarousel.forEach(art => {
 
 /* ─── BUILD TEASER ─── */
 const teaserDefs = [
-  { name: "Nirvana", img: "images/Nirvana.jpg" },
-  { name: "Eternity", img: "images/Eternity_JPG.jpg" },
-  { name: "Euphoria", img: "images/11.jpg" }
+  { name: "Nirvana", img: img("Nirvana.jpg") },
+  { name: "Eternity", img: img("Eternity_JPG.jpg") },
+  { name: "Euphoria", img: img("11.jpg") }
 ];
 const teaserWrap = document.getElementById('teaser-works');
 teaserDefs.forEach(t => {
