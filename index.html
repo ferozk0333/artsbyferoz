@@ -660,13 +660,15 @@ const yrtxt = '\u00a9 ' + yr + ' Feroz Khan';
 
 /* ─── BUILD CAROUSEL ─── */
 const carouselWrap = document.getElementById('home-carousel');
-const allForCarousel = [...artworks, ...artworks]; // duplicate for seamless loop
-allForCarousel.forEach(art => {
-  const d = document.createElement('div');
-  d.className = 'carousel-item';
-  d.innerHTML = `<img src="${art.img}" alt="${art.name}" loading="lazy"><span class="carousel-item-name">${art.name}</span>`;
-  carouselWrap.appendChild(d);
-});
+if (carouselWrap) {
+  const allForCarousel = [...artworks, ...artworks];
+  allForCarousel.forEach(art => {
+    const d = document.createElement('div');
+    d.className = 'carousel-item';
+    d.innerHTML = `<img src="${art.img}" alt="${art.name}" loading="lazy"><span class="carousel-item-name">${art.name}</span>`;
+    carouselWrap.appendChild(d);
+  });
+}
 
 /* ─── BUILD TEASER ─── */
 const teaserDefs = [
@@ -675,17 +677,19 @@ const teaserDefs = [
   { name: "Euphoria", img: "images/11.jpg" }
 ];
 const teaserWrap = document.getElementById('teaser-works');
-teaserDefs.forEach(t => {
-  const d = document.createElement('div');
-  d.className = 'teaser-work';
-  d.onclick = () => openLightboxByName(t.name);
-  d.innerHTML = `<img src="${t.img}" alt="${t.name}"><div class="teaser-work-caption"><span class="teaser-work-name">${t.name}</span></div>`;
-  teaserWrap.appendChild(d);
-});
+if (teaserWrap) {
+  teaserDefs.forEach(t => {
+    const d = document.createElement('div');
+    d.className = 'teaser-work';
+    d.onclick = () => openLightboxByName(t.name);
+    d.innerHTML = `<img src="${t.img}" alt="${t.name}"><div class="teaser-work-caption"><span class="teaser-work-name">${t.name}</span></div>`;
+    teaserWrap.appendChild(d);
+  });
+}
 
 /* ─── BUILD GALLERY ─── */
 const galleryGrid = document.getElementById('gallery-grid');
-artworks.forEach((art, i) => {
+if (galleryGrid) artworks.forEach((art, i) => {
   const el = document.createElement('div');
   el.className = 'gallery-item';
   el.dataset.filter = art.filter;
@@ -696,7 +700,7 @@ artworks.forEach((art, i) => {
   const gImg = document.createElement('img');
   gImg.src = art.img;
   gImg.alt = art.name;
-  gImg.loading = 'lazy';
+  gImg.loading = 'eager';
 
   const caption = document.createElement('div');
   caption.className = 'gallery-item-caption';
@@ -732,7 +736,7 @@ function showPanel(artIndex) {
 
 /* ─── BUILD EXCLUSIVE ─── */
 const excGrid = document.getElementById('exclusive-grid');
-exclusiveSeries.forEach(s => {
+if (excGrid) exclusiveSeries.forEach(s => {
   const el = document.createElement('div');
   el.className = 'exclusive-card';
   el.onclick = () => openEssay(s);
