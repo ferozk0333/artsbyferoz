@@ -699,7 +699,6 @@ artworks.forEach((art, i) => {
   const gImg = document.createElement('img');
   gImg.src = art.img;
   gImg.alt = art.name;
-  gImg.loading = 'lazy';
 
   const caption = document.createElement('div');
   caption.className = 'gallery-item-caption';
@@ -746,7 +745,6 @@ exclusiveSeries.forEach(s => {
   const thumbImg = document.createElement('img');
   thumbImg.src = 'https://img.youtube.com/vi/' + s.videoId + '/hqdefault.jpg';
   thumbImg.alt = s.name;
-  thumbImg.loading = 'lazy';
   thumbImg.onerror = function() { this.src = 'https://img.youtube.com/vi/' + s.videoId + '/mqdefault.jpg'; };
 
   const playBtn = document.createElement('div');
