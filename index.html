@@ -198,6 +198,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .about-layout { display: grid; grid-template-columns: 200px 1fr; gap: 4rem; align-items: start; }
 .about-section-label { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--ink); opacity: 0.2; line-height: 1; padding-top: 0.25rem; }
 .about-body { font-size: 15px; color: var(--cream-dim); line-height: 1.85; }
+.about-content { display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: center; }
+.about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; filter: brightness(0.95) saturate(0.92); display: block; }
 
 /* ======================== REVIEWS ======================== */
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; border: 1px solid var(--divider-strong); background: var(--divider); }
@@ -340,6 +342,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   .about-section { padding: 2.5rem 1.25rem; }
   .about-section-label { font-size: 1.5rem; margin-bottom: 0.5rem; }
   .about-body { font-size: 14px; }
+  .about-content { grid-template-columns: 1fr; gap: 1.5rem; }
+  .about-img { aspect-ratio: 16/9; }
 
   /* REVIEWS */
   .reviews-grid { padding: 0 1.25rem; grid-template-columns: 1fr; }
@@ -501,19 +505,28 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   <div class="about-section">
     <div class="about-layout">
       <div class="about-section-label">Background</div>
-      <p class="about-body">Right from my childhood days, creating something from scratch has always fascinated me. Be it assembling DIY Mechanics games, or gardening, or following Art shows, I have created, tinkered with and ruined countless things in the process. But as I grew up, the lil' creative side of me picked up on paints n' brushes. Before I realized, I started painting my imagination on canvas and never looked back.</p>
+      <div class="about-content">
+        <p class="about-body">Right from my childhood days, creating something from scratch has always fascinated me. Be it assembling DIY Mechanics games, or gardening, or following Art shows, I have created, tinkered with and ruined countless things in the process. But as I grew up, the lil' creative side of me picked up on paints n' brushes. Before I realized, I started painting my imagination on canvas and never looked back.</p>
+        <img src="images/mybackground.jpg" alt="My Background" class="about-img">
+      </div>
     </div>
   </div>
   <div class="about-section">
     <div class="about-layout">
       <div class="about-section-label">Medium</div>
-      <p class="about-body">Being a self-taught artist, my artworks are predominantly acrylic-based besides a few string arts. My preferred canvas size is 14 x 18 with the biggest canvas used so far being 18 x 24. I use different brushes, painting techniques, toothbrushes, ice-cream sticks and in fact everything I can grab to paint my dreams. Landscape scenery alongside some abstract art is what I like to do.</p>
+      <div class="about-content">
+        <p class="about-body">Being a self-taught artist, my artworks are predominantly acrylic-based besides a few string arts. My preferred canvas size is 14 x 18 with the biggest canvas used so far being 18 x 24. I use different brushes, painting techniques, toothbrushes, ice-cream sticks and in fact everything I can grab to paint my dreams. Landscape scenery alongside some abstract art is what I like to do.</p>
+        <img src="images/mymedium.jpg" alt="My Medium" class="about-img">
+      </div>
     </div>
   </div>
   <div class="about-section">
     <div class="about-layout">
       <div class="about-section-label">Inspiration</div>
-      <p class="about-body">Being a creative thinker and a keen observer, when I visit places, I like to note the intricacies of interaction between humans and their environment. This acts as an inspiration for everything I do in life. All my artworks convey a human attribute. Some reflect ease, others exhibit effort while a few manifest motivation.</p>
+      <div class="about-content">
+        <p class="about-body">Being a creative thinker and a keen observer, when I visit places, I like to note the intricacies of interaction between humans and their environment. This acts as an inspiration for everything I do in life. All my artworks convey a human attribute. Some reflect ease, others exhibit effort while a few manifest motivation.</p>
+        <img src="images/myinspiration.jpg" alt="My Inspiration" class="about-img">
+      </div>
     </div>
   </div>
   <div class="bridge">
@@ -702,20 +715,20 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <script>
 /* ─── DATA ─── */
 const artworks = [
-  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/1.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
-  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "images/2.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
-  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/4.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
-  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/5.jpg", story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
-  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "images/6.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
-  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/7.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
-  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "images/8.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
-  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/9.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
-  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/10.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
-  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: "images/as.jpg", story: "While sipping my favourite countrybean coffee, I thought: why not make my next artwork with this coffee itself?" },
-  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
-  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "images/Nirvana.jpg", story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance, becoming extinguished, as when a flame is blown out." },
-  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "images/photo_2024-08-10_02-21-04.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
-  { name: "Euphoria", medium: "Acrylic, Umber and Bronze palette", filter: "Acrylic", img: "images/11.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
+  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/chaos-and-the-calm.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil\u2019 birds calling it a day." },
+  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "images/connect-the-nails.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
+  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/misty-blue.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
+  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/just-hanging-around.jpg", story: "Have you never been somewhere but felt like you\u2019ve lived there forever? How about spending a beautiful Sunday morning here?" },
+  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "images/awakening.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
+  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/serendipity.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I\u2019ll do the reservations." },
+  { name: "Shades n\u2019 Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "images/shades-and-silhouettes.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. What about you? Life is not plain black and white, it\u2019s the shades of grey that define it." },
+  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/the-other-world.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
+  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/time-zones.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
+  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: "images/epiphany.jpg", story: "Be it morning coffee or brunch coffee, evening coffee or late-night coffee, I\u2019m always up to grab another cup. So, while sipping my favourite countrybean, I thought why not make my next artwork with this coffee itself." },
+  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation! All I do is let my imagination run free. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas. Textures help me accentuate the buffet of thoughts, with each coming and leaving momentarily." },
+  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "images/Nirvana.jpg", story: "In Buddhism, Nirvana is a transcendent state which refers to the extinction of desire, hatred, and ignorance. Literally, it means \u2018becoming extinguished\u2019 as when a flame is blown out. Or simply put, getting detached from all kinds of material experiences." },
+  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "images/masterpiece-heisenberg.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
+  { name: "Euphoria", medium: "Abstract Acrylic", filter: "Abstract", img: "images/euphoria.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth\u2019s stability and the warmth of the human spirit. Brown adds a layer of natural warmth, while Bronze lends a touch of timelessness, echoing the ancient roots of euphoria in human history." }
 ];
 
 const exclusiveSeries = [
@@ -770,7 +783,7 @@ if (carouselWrap) {
 const teaserDefs = [
   { name: "Nirvana", img: "images/Nirvana.jpg" },
   { name: "Eternity", img: "images/Eternity_JPG.jpg" },
-  { name: "Euphoria", img: "images/11.jpg" }
+  { name: "Euphoria", img: "images/euphoria.jpg" }
 ];
 const teaserWrap = document.getElementById('teaser-works');
 if (teaserWrap) {
