@@ -86,8 +86,9 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .dedication-text { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--cream-dim); opacity: 0.6; letter-spacing: 0.04em; }
 
 /* HOME CAROUSEL */
-.home-carousel-wrap { overflow: hidden; margin: 4rem 0 0; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); padding: 3rem 0; }
-.home-carousel-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.5; text-align: center; display: block; margin-bottom: 2rem; }
+.home-carousel-outer { padding: 4rem 2.5rem 0; }
+.home-carousel-wrap { overflow: hidden; max-width: 900px; margin: 0 auto; border: 1px solid var(--divider); border-radius: 2px; padding: 2rem 0; }
+.home-carousel-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.6; text-align: center; display: block; margin-bottom: 1.5rem; }
 .home-carousel { display: flex; gap: 16px; width: max-content; animation: carousel-scroll 60s linear infinite; cursor: pointer; }
 .home-carousel:hover { animation-play-state: paused; }
 @keyframes carousel-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -105,8 +106,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .teaser-work:hover img { filter: brightness(1) saturate(1.05); transform: scale(1.04); }
 .teaser-work-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 0.9rem; background: linear-gradient(to top, rgba(46,31,15,0.72) 0%, transparent 100%); }
 .teaser-work-name { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: #fff; display: block; text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
-.home-cta { text-align: center; padding: 0 2rem 2rem; border-top: 1px solid var(--divider); padding-top: 2rem; }
-.cta-text { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--cream-dim); margin-bottom: 1rem; }
+.home-cta { text-align: center; padding: 2.5rem 2rem 4rem; }
+.cta-text { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--cream-dim); margin-bottom: 1rem; }
 
 /* ======================== EXHIBITION ======================== */
 .exhibition-layout { display: grid; grid-template-columns: 1fr 320px; gap: 0; max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; align-items: start; }
@@ -140,47 +141,16 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 /* ======================== LIGHTBOX ======================== */
 .lightbox-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(253,246,236,0.98); align-items: center; justify-content: center; }
 .lightbox-overlay.open { display: flex; }
-
-.lightbox-inner {
-  display: flex;
-  align-items: center;
-  max-width: 1200px;
-  width: 97%;
-  height: 90vh;
-  gap: 3rem;
-}
-
-.lightbox-img-wrap {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-}
-.lightbox-img-wrap img { max-width: 100%; max-height: 88vh; object-fit: contain; display: block; }
-
-.lightbox-info {
-  width: 300px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 3rem 0;
-}
-
-.lightbox-text-area { flex: 1; }
-.lightbox-medium { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
-.lightbox-name { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--ink); line-height: 1.15; margin-bottom: 1.5rem; }
-.lightbox-story { font-size: 14px; color: var(--cream-dim); line-height: 1.75; }
-
-/* Fixed-position nav at bottom of info column */
-.lightbox-controls {
-  flex-shrink: 0;
-  padding-top: 2rem;
-  border-top: 1px solid var(--divider);
-}
-.lightbox-nav { display: flex; gap: 1rem; margin-bottom: 0.75rem; }
+.lightbox-inner { display: flex; align-items: center; max-width: 1300px; width: 98%; height: 92vh; gap: 2rem; }
+.lightbox-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 1.5rem 0; height: 100%; }
+.lightbox-img-wrap img { max-width: 100%; max-height: 90vh; object-fit: contain; display: block; }
+.lightbox-info { width: 260px; flex-shrink: 0; display: flex; flex-direction: column; padding: 2rem 0; height: 100%; }
+.lightbox-text-area { flex: 0 0 auto; }
+.lightbox-medium { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.75rem; }
+.lightbox-name { font-family: var(--serif); font-size: 1.75rem; font-weight: 300; color: var(--ink); line-height: 1.15; margin-bottom: 1rem; }
+.lightbox-story { font-size: 13px; color: var(--cream-dim); line-height: 1.75; }
+.lightbox-controls { flex-shrink: 0; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--divider); }
+.lightbox-nav { display: flex; gap: 1rem; margin-bottom: 0.6rem; }
 .lightbox-nav button { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); border: 1px solid var(--divider-strong); background: none; padding: 0.6rem 1.25rem; cursor: pointer; transition: all 0.2s; font-family: var(--sans); min-width: 80px; }
 .lightbox-nav button:hover { color: var(--ink); border-color: var(--cream-dim); }
 .lightbox-counter { font-size: 11px; color: var(--cream-dim); opacity: 0.45; }
@@ -277,7 +247,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   .about-layout { grid-template-columns: 1fr; gap: 1rem; }
   .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
   .lightbox-inner { flex-direction: column; height: auto; max-height: 90vh; overflow-y: auto; }
-  .lightbox-info { width: 100%; height: auto; }
+  .lightbox-info { width: 100%; height: auto; padding: 1rem 0; }
   .lightbox-controls { border-top: none; padding-top: 1rem; }
   .essay-modal-inner { flex-direction: column; }
   .essay-text-col { width: 100%; max-height: 300px; }
@@ -303,8 +273,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <!-- ======================== HOME ======================== -->
 <div id="home" class="page active">
   <div class="hero">
-    <span class="eyebrow">Original Art</span>
-    <h1 class="hero-name">Feroz<br>Khan</h1>
+    <span class="eyebrow">A painting journal</span>
+    <h1 class="hero-name">Arts by<br>Feroz</h1>
     <p class="hero-tagline">Painter of landscapes, abstracts &amp; the spaces in between</p>
     <div class="hero-nav-cards">
       <div class="hero-nav-card" onclick="showPage('exhibition')">
@@ -331,19 +301,15 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   </div>
 
   <div class="dedication">
-    <p class="dedication-text">This gallery is dedicated to my KK &mdash; the reason behind every brushstroke.</p>
+    <p class="dedication-text">To my KK, the reason behind every brushstroke.</p>
   </div>
 
   <!-- Scrolling carousel of all artworks -->
-  <div class="home-carousel-wrap">
+  <div class="home-carousel-outer">
     <span class="home-carousel-label">Through the Collection</span>
-    <div class="home-carousel" id="home-carousel" onclick="showPage('exhibition')"></div>
-  </div>
-
-  <!-- Signature 3 teaser -->
-  <div class="home-teaser">
-    <span class="home-teaser-label">Signature Works</span>
-    <div class="teaser-works" id="teaser-works"></div>
+    <div class="home-carousel-wrap">
+      <div class="home-carousel" id="home-carousel" onclick="showPage('exhibition')"></div>
+    </div>
     <div class="home-cta">
       <p class="cta-text">Explore the full collection.</p>
       <button class="btn-ghost" onclick="showPage('exhibition')">Enter Exhibition</button>
@@ -481,32 +447,26 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
     <div class="review-card">
       <span class="review-title">Keep creating</span>
       <p class="review-quote">The website is simple yet appealing. All the paintings are splendid and clearly show the effort you've put in creating them. My favourite is The Masterpiece. Totally nailed it!!</p>
-      <span class="review-name">Kaariba Khan</span>
     </div>
     <div class="review-card">
       <span class="review-title">Mindblowing</span>
       <p class="review-quote">My fav was the Galaxy. It was like a sea of colours I could get lost into. Loved it. Keep on creating such artworks. Your creativity has overwhelming potential.</p>
-      <span class="review-name">Jahnabi Sharma</span>
     </div>
     <div class="review-card">
       <span class="review-title">Multitalented</span>
       <p class="review-quote">Do you take orders? Because I really want to buy a couple of them. Seriously, they're all beautiful.</p>
-      <span class="review-name">Divya Advani</span>
     </div>
     <div class="review-card">
       <span class="review-title">One word: Amazing</span>
       <p class="review-quote">Peaceful. Paintings and presentation both! Especially that Heisenberg video. It was just amazing. Keep it up.</p>
-      <span class="review-name">Emaad Sultan</span>
     </div>
     <div class="review-card">
       <span class="review-title">Gifted</span>
       <p class="review-quote">Wow... where do I even start? Being able to create art is the greatest gift that one can have and you are profoundly blessed. Would absolutely love to see more of these!</p>
-      <span class="review-name">Ekveera Joshi</span>
     </div>
     <div class="review-card">
       <span class="review-title">Fascinating</span>
       <p class="review-quote">The details in the artwork are brilliant and absolutely fascinating to see. Very well drawn and in my view, really good.</p>
-      <span class="review-name">Sai Hritish</span>
     </div>
   </div>
   <div class="bridge">
@@ -580,8 +540,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
         <button class="form-submit" onclick="submitForm()">Send Message</button>
       </div>
       <div class="form-success" id="form-success">
-        <p class="form-success-text">Thank you -- your message is on its way.</p>
-        <p class="form-success-sub">A copy has been sent to ferozk0333@gmail.com</p>
+        <p class="form-success-text">Thank you. Your message has been received.</p>
+        <p class="form-success-sub">I'll get back to you soon.</p>
       </div>
     </div>
   </div>
@@ -757,7 +717,7 @@ exclusiveSeries.forEach(s => {
   const el = document.createElement('div');
   el.className = 'exclusive-card';
   el.onclick = () => openEssay(s);
-  el.innerHTML = `<div class="exclusive-thumb"><img src="https://img.youtube.com/vi/${s.videoId}/maxresdefault.jpg" alt="${s.name}" loading="lazy"><div class="play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/><polygon points="21,16 39,26 21,36" fill="rgba(255,255,255,0.95)"/></svg></div></div><div class="exclusive-card-body"><span class="exclusive-num">${s.num}</span><span class="exclusive-card-name">${s.name}</span><span class="exclusive-card-medium">${s.medium}</span><span class="exclusive-card-hint">${s.essay ? 'Watch film and read artist note' : 'Watch film'} &rarr;</span></div>`;
+  el.innerHTML = `<div class="exclusive-thumb"><img src="https://img.youtube.com/vi/${s.videoId}/hqdefault.jpg" alt="${s.name}" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${s.videoId}/mqdefault.jpg'"><div class="play-btn"><svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="26" r="25" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/><polygon points="21,16 39,26 21,36" fill="rgba(255,255,255,0.95)"/></svg></div></div><div class="exclusive-card-body"><span class="exclusive-num">${s.num}</span><span class="exclusive-card-name">${s.name}</span><span class="exclusive-card-medium">${s.medium}</span><span class="exclusive-card-hint">${s.essay ? 'Watch film and read artist note' : 'Watch film'} &rarr;</span></div>`;
   excGrid.appendChild(el);
 });
 
@@ -878,8 +838,17 @@ function submitForm() {
     const email = em;
     const subject = document.getElementById('f-subject').value.trim() || 'Message from art portfolio';
     const msg = document.getElementById('f-message').value.trim();
-    const body = 'From: ' + name + ' (' + email + ')%0A%0A' + msg;
-    window.location.href = 'mailto:ferozk0333@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + body;
+    // Send via FormSpree (replace YOUR_FORM_ID with actual ID from formspree.io)
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('subject', subject || 'Message from art portfolio');
+    formData.append('message', msg);
+    fetch('https://formspree.io/f/ferozk0333', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).catch(() => {});
     document.getElementById('contact-form').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   }
