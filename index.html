@@ -90,7 +90,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 
 /* HOME CAROUSEL */
 .home-carousel-outer { padding: 0 0 0; }
-.home-carousel-wrap { overflow: hidden; margin: 0; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); padding: 2rem 0; }
+.home-carousel-wrap { overflow: hidden; max-width: 830px; margin: 0 auto; border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); padding: 2rem 0; }
 .home-carousel-label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.6; text-align: center; display: block; margin-bottom: 1.5rem; }
 .home-carousel { display: flex; gap: 16px; width: max-content; animation: carousel-scroll 60s linear infinite; cursor: pointer; }
 .home-carousel:hover { animation-play-state: paused; }
@@ -161,7 +161,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .lightbox-close:hover { color: var(--ink); }
 
 /* ======================== EXCLUSIVE ======================== */
-.exclusive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+.exclusive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 6px; max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
 .exclusive-card { background: var(--bg-card); cursor: pointer; transition: background 0.25s; overflow: hidden; border: 1px solid var(--divider); border-radius: 3px; }
 .exclusive-card:hover { background: var(--bg-warm); }
 .exclusive-thumb { position: relative; aspect-ratio: 16/9; overflow: hidden; }
@@ -196,7 +196,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .essay-close:hover { color: rgba(253,246,236,0.9); }
 
 /* ======================== ABOUT ======================== */
-.about-section { padding: 5rem 2.5rem; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--divider); }
+.about-section { padding: 5rem 2.5rem; max-width: 1280px; margin: 0 auto; border-bottom: 1px solid var(--divider); }
 .about-section:last-of-type { border-bottom: none; }
 .about-layout { display: grid; grid-template-columns: 200px 1fr; gap: 4rem; align-items: start; }
 .about-section-label { font-family: var(--serif); font-size: 2rem; font-weight: 300; color: var(--ink); opacity: 0.38; line-height: 1; padding-top: 0.25rem; }
@@ -205,7 +205,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; filter: brightness(0.95) saturate(0.92); display: block; }
 
 /* ======================== REVIEWS ======================== */
-.reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; border: 1px solid var(--divider-strong); background: var(--divider); }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; border: 1px solid var(--divider-strong); background: var(--divider); }
 .review-card { padding: 2.5rem 2rem; background: var(--bg); transition: background 0.2s; }
 .review-card:hover { background: var(--bg-warm); }
 .review-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.75rem; font-weight: 500; }
@@ -214,7 +214,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .review-name { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); font-weight: 500; }
 
 /* ======================== CONTACT ======================== */
-.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1000px; margin: 0 auto; padding: 4rem 2.5rem 5rem; }
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem 5rem; }
 .contact-headline { font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 300; line-height: 1.25; color: var(--ink); margin-bottom: 1.5rem; }
 .contact-intro { font-size: 14px; color: var(--cream-dim); opacity: 0.85; line-height: 1.8; margin-bottom: 2.5rem; }
 .contact-links { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -1017,7 +1017,13 @@ document.addEventListener('keydown', e => {
   }
   if (document.getElementById('essay-modal').classList.contains('open') && e.key === 'Escape') closeEssay();
 });
-document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  // Close if clicking the overlay background, not the inner content
+  if (e.target === this) closeLightbox();
+});
+document.querySelector('.lightbox-inner').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
 document.getElementById('essay-modal').addEventListener('click', function(e) { if (e.target === this) closeEssay(); });
 
 /* ─── TOUCH SWIPE: lightbox left/right + pull-down to close ─── */
