@@ -65,10 +65,10 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .page-subtitle { font-size: 13px; color: var(--cream-dim); opacity: 0.8; }
 
 /* ======================== HOME ======================== */
-#home .hero { min-height: calc(100vh - 60px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; }
-.hero-name { font-family: var(--serif); font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; letter-spacing: 0.06em; line-height: 1.05; color: var(--ink); margin-bottom: 1.5rem; }
-.hero-tagline { font-family: var(--serif); font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; color: var(--cream-dim); margin-bottom: 3rem; font-weight: 300; }
-.hero-nav-cards { display: flex; gap: 1px; margin-top: 3rem; border: 1px solid var(--divider-strong); background: var(--divider); }
+#home .hero { min-height: calc(100vh - 60px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; }
+.hero-name { font-family: var(--serif); font-size: clamp(2.8rem, 6.5vw, 6rem); font-weight: 300; letter-spacing: 0.12em; line-height: 1; color: var(--ink); margin-bottom: 0.5rem; }
+.hero-tagline { font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.6; margin-bottom: 3.5rem; font-weight: 400; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.hero-nav-cards { display: flex; gap: 1px; margin-top: 0; border: 1px solid var(--divider-strong); background: var(--divider); }
 .hero-nav-card { flex: 1; padding: 2rem 1.5rem; text-align: left; cursor: pointer; transition: background 0.25s; border-right: 1px solid var(--divider-strong); background: var(--bg); }
 .hero-nav-card:last-child { border-right: none; }
 .hero-nav-card:hover { background: var(--bg-warm); }
@@ -77,7 +77,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .hero-nav-card-desc { font-size: 12px; color: var(--cream-dim); opacity: 0.85; line-height: 1.5; }
 
 /* ARTIST STATEMENT */
-.artist-statement { max-width: 620px; margin: 5rem auto 0; text-align: center; padding: 0 2rem; }
+.artist-statement { max-width: 620px; margin: 1.5rem auto 0; text-align: center; padding: 0 2rem; }
 .statement-quote { font-family: var(--serif); font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-style: italic; font-weight: 300; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
 .statement-attr { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream-dim); opacity: 0.55; }
 
@@ -273,9 +273,8 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <!-- ======================== HOME ======================== -->
 <div id="home" class="page active">
   <div class="hero">
-    <span class="eyebrow">A painting journal</span>
-    <h1 class="hero-name">Arts by<br>Feroz</h1>
-    <p class="hero-tagline">Painter of landscapes, abstracts &amp; the spaces in between</p>
+    <h1 class="hero-name">Arts by Feroz</h1>
+    <p class="hero-tagline">Paintings &nbsp;&middot;&nbsp; Landscapes &nbsp;&middot;&nbsp; Abstract &nbsp;&middot;&nbsp; String Art</p>
     <div class="hero-nav-cards">
       <div class="hero-nav-card" onclick="showPage('exhibition')">
         <span class="hero-nav-card-label">Gallery</span>
@@ -541,7 +540,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
       </div>
       <div class="form-success" id="form-success">
         <p class="form-success-text">Thank you. Your message has been received.</p>
-        <p class="form-success-sub">I'll get back to you soon.</p>
+        <p class="form-success-sub">Your message went straight to my inbox. I'll be in touch soon.</p>
       </div>
     </div>
   </div>
@@ -607,20 +606,20 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <script>
 /* ─── DATA ─── */
 const artworks = [
-  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/1.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
-  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "images/2.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
-  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/4.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
-  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/5.jpg", story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
-  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "images/6.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
-  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/7.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
-  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "images/8.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
-  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/9.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
-  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "images/10.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
-  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: "images/as.jpg", story: "While sipping my favourite countrybean coffee, I thought: why not make my next artwork with this coffee itself?" },
-  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
-  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "images/Nirvana.jpg", story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance, becoming extinguished, as when a flame is blown out." },
-  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "images/photo_2024-08-10_02-21-04.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
-  { name: "Euphoria", medium: "Acrylic, Umber and Bronze palette", filter: "Acrylic", img: "images/11.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
+  { name: "Chaos and the Calm", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/1.jpg", story: "Inspired from a summer road trip, this vibrant artwork unravels the innate beauty of the setting Sun and lil' birds calling it a day." },
+  { name: "Connect the Nails", medium: "String Art", filter: "String Art", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/2.jpg", story: "Made using a brown colored canvas, uncountable nails and a long spindle of white thread, this craft piece speaks for something more than a mere leafless tree. Can you guess?" },
+  { name: "Misty Blue", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/4.jpg", story: "Lost in the midst of endless bliss, I feel tethered to the mists of divine blue." },
+  { name: "Just Hanging Around", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/5.jpg", story: "Have you never been somewhere but felt like you've lived there forever? How about spending a beautiful Sunday morning here?" },
+  { name: "Awakening", medium: "Abstract Acrylic", filter: "Abstract", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/6.jpg", story: "This abstract artwork intercepts the capacity to reflect on your own nature, to abstract but also to feel: the rational and sensuous experience." },
+  { name: "Serendipity", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/7.jpg", story: "How about grabbing a cup of hazelnut latte this weekend? I'll do the reservations." },
+  { name: "Shades n' Silhouettes", medium: "Monochromatic Acrylic", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/8.jpg", story: "Meticulously brushed on a re-used canvas, this monochromatic artwork has more colourful tales to narrate than its colours. Life is not plain black and white, it's the shades of grey that define it." },
+  { name: "The Other World", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/9.jpg", story: "This is one of my favourite artworks. Painted using acrylic colours, I vividly remember the joy of stroking my brush as I blended the different colours." },
+  { name: "The Time Zones", medium: "Acrylic on Canvas", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/10.jpg", story: "One world. Seven Continents. Endless Stories. While some get a stage, most are lost in the mists of time." },
+  { name: "An Epiphany", medium: "Coffee and Acrylic", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/as.jpg", story: "While sipping my favourite countrybean coffee, I thought: why not make my next artwork with this coffee itself?" },
+  { name: "Eternity", medium: "Abstract Acrylic, Textured", filter: "Abstract", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/Eternity_JPG.jpg", story: "Abstract painting is pure meditation. The mind and soul conspire a free run of thoughts and the hands capture them red-handed on canvas." },
+  { name: "Nirvana", medium: "Abstract Acrylic", filter: "Abstract", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/Nirvana.jpg", story: "In Buddhism, Nirvana refers to the extinction of desire, hatred, and ignorance, becoming extinguished, as when a flame is blown out." },
+  { name: "The Masterpiece", medium: "String Art", filter: "String Art", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/photo_2024-08-10_02-21-04.jpg", story: "168 Hours. 2.1 Km of Sewing Thread. 554 Nails. Because some things are worth the effort." },
+  { name: "Euphoria", medium: "Acrylic, Umber and Bronze palette", filter: "Acrylic", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/11.jpg", story: "The colours Umber and Raw Sienna ground the work, evoking the earth's stability and the warmth of the human spirit." }
 ];
 
 const exclusiveSeries = [
@@ -671,9 +670,9 @@ allForCarousel.forEach(art => {
 
 /* ─── BUILD TEASER ─── */
 const teaserDefs = [
-  { name: "Nirvana", img: "images/Nirvana.jpg" },
-  { name: "Eternity", img: "images/Eternity_JPG.jpg" },
-  { name: "Euphoria", img: "images/11.jpg" }
+  { name: "Nirvana", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/Nirvana.jpg" },
+  { name: "Eternity", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/Eternity_JPG.jpg" },
+  { name: "Euphoria", img: "https://raw.githubusercontent.com/ferozk0333/artsbyferoz/main/images/11.jpg" }
 ];
 const teaserWrap = document.getElementById('teaser-works');
 teaserDefs.forEach(t => {
@@ -833,25 +832,41 @@ function submitForm() {
   const em = document.getElementById('f-email').value.trim();
   if (!em || !em.includes('@')) { document.getElementById('err-email').style.display = 'block'; valid = false; }
   if (!document.getElementById('f-message').value.trim()) { document.getElementById('err-message').style.display = 'block'; valid = false; }
-  if (valid) {
-    const name = document.getElementById('f-name').value.trim();
-    const email = em;
-    const subject = document.getElementById('f-subject').value.trim() || 'Message from art portfolio';
-    const msg = document.getElementById('f-message').value.trim();
-    // Send via FormSpree (replace YOUR_FORM_ID with actual ID from formspree.io)
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('subject', subject || 'Message from art portfolio');
-    formData.append('message', msg);
-    fetch('https://formspree.io/f/ferozk0333', {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    }).catch(() => {});
-    document.getElementById('contact-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }
+  if (!valid) return;
+
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const data = {
+    name: document.getElementById('f-name').value.trim(),
+    email: em,
+    _subject: document.getElementById('f-subject').value.trim() || 'Message from Arts by Feroz',
+    message: document.getElementById('f-message').value.trim(),
+    _replyto: em
+  };
+
+  fetch('https://formspree.io/f/xwvdldla', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if (res.ok || res.next) {
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } else {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Something went wrong. Please try emailing ferozk0333@gmail.com directly.');
+    }
+  })
+  .catch(() => {
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+    alert('Could not send. Please email ferozk0333@gmail.com directly.');
+  });
 }
 </script>
 </body>
