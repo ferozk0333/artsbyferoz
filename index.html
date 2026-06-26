@@ -141,6 +141,10 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .filter-pill:hover { border-color: var(--cream-dim); color: var(--ink); }
 .filter-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
+/* FLOATING CLOSE BUTTON (mobile) */
+.close-fab { display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); width: 52px; height: 52px; border-radius: 50%; background: var(--ink); color: var(--bg); border: none; font-size: 1.5rem; line-height: 1; cursor: pointer; z-index: 400; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.25); transition: opacity 0.2s; }
+.close-fab-dark { background: rgba(253,246,236,0.15); color: rgba(253,246,236,0.9); border: 1px solid rgba(255,255,255,0.2); }
+
 /* ======================== LIGHTBOX ======================== */
 .lightbox-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(253,246,236,0.98); align-items: center; justify-content: center; }
 .lightbox-overlay.open { display: flex; }
@@ -324,6 +328,10 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   .gallery-info-panel { display: none; } /* hide hover panel on touch — use lightbox instead */
   .filter-bar { padding: 0 0.75rem 1.5rem; gap: 0.5rem; }
   .filter-pill { font-size: 9px; padding: 0.4rem 0.9rem; }
+
+  /* FLOATING CLOSE */
+  .close-fab { display: flex; }
+  .lightbox-close { display: none; }
 
   /* LIGHTBOX */
   .lightbox-overlay { align-items: flex-start; }
@@ -682,6 +690,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <!-- ======================== LIGHTBOX ======================== -->
 <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Artwork detail">
   <button class="lightbox-close" onclick="closeLightbox()">Close &times;</button>
+  <button class="close-fab" onclick="closeLightbox()" aria-label="Close">&times;</button>
   <div class="lightbox-inner">
     <div class="lightbox-img-wrap">
       <img id="lb-img" src="" alt="">
@@ -706,6 +715,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 <!-- ======================== ESSAY + VIDEO MODAL ======================== -->
 <div class="essay-modal-overlay" id="essay-modal" role="dialog" aria-modal="true" aria-label="Film and artist note">
   <button class="essay-close" onclick="closeEssay()">Close &times;</button>
+  <button class="close-fab close-fab-dark" onclick="closeEssay()" aria-label="Close">&times;</button>
   <div class="essay-modal-inner">
     <div class="essay-video-col">
       <iframe id="essay-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen muted playsinline></iframe>
@@ -1026,44 +1036,24 @@ document.querySelector('.lightbox-inner').addEventListener('click', function(e) 
 });
 document.getElementById('essay-modal').addEventListener('click', function(e) { if (e.target === this) closeEssay(); });
 
-/* ─── TOUCH SWIPE: lightbox left/right + pull-down to close ─── */
+/* ─── TOUCH SWIPE: lightbox left/right only ─── */
 (function() {
-  let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+  let touchStartX = 0, touchStartY = 0;
 
-  function addSwipe(el, onLeft, onRight, onDown) {
-    el.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-    el.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-      const dx = touchEndX - touchStartX;
-      const dy = touchEndY - touchStartY;
-      // Swipe up OR down to close: > 60px vertical and more vertical than horizontal
-      if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) { onDown && onDown(); return; }
-      // Horizontal swipe: must be > 50px and more horizontal than vertical
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-        if (dx < 0) onLeft && onLeft();
-        else onRight && onRight();
-      }
-    }, { passive: true });
-  }
+  document.getElementById('lightbox').addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
 
-  // Lightbox: swipe left = next, swipe right = prev, swipe down = close
-  addSwipe(
-    document.getElementById('lightbox'),
-    () => lbNav(1),
-    () => lbNav(-1),
-    () => closeLightbox()
-  );
-
-  // Essay modal: swipe down = close
-  addSwipe(
-    document.getElementById('essay-modal'),
-    null, null,
-    () => closeEssay()
-  );
+  document.getElementById('lightbox').addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    const dy = e.changedTouches[0].screenY - touchStartY;
+    // Only horizontal swipe, must be dominant axis and > 50px
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) lbNav(1);
+      else lbNav(-1);
+    }
+  }, { passive: true });
 })();
 
 /* ─── CONTACT FORM ─── */
