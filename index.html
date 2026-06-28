@@ -246,25 +246,26 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   display: none;
   position: fixed;
   top: 60px; right: 0; bottom: 0;
-  width: 260px;
+  width: 455px;
   z-index: 50;
   background: #0e0805;
-  border-left: 1px solid rgba(46,31,15,0.18);
+  border-left: 1px solid rgba(46,31,15,0.22);
   flex-direction: column;
   overflow: hidden;
 }
 #reel-strip.reel-on { display: flex; }
 
 .reel-hdr {
-  padding: 9px 12px 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 11px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   flex-shrink: 0;
+  background: linear-gradient(135deg, #1a0e06 0%, #0e0805 60%, #12100e 100%);
 }
 .reel-eyebrow {
-  font-size: 8px;
-  letter-spacing: 0.18em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(196,98,45,0.75);
+  color: rgba(196,98,45,0.85);
   font-family: var(--sans);
 }
 
@@ -272,6 +273,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   flex: 1;
   position: relative;
   overflow: hidden;
+  pointer-events: none; /* scroll/hover on gallery never reaches the video */
 }
 
 #reel-a, #reel-b {
@@ -280,7 +282,9 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 1.4s ease-in-out;
+  pointer-events: none; /* video never intercepts mouse events */
+  user-select: none;
 }
 #reel-a { opacity: 1; z-index: 2; }
 #reel-b { opacity: 0; z-index: 1; }
@@ -290,27 +294,27 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .reel-overlay {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 2.5rem 12px 14px;
-  background: linear-gradient(to top, rgba(8,4,2,0.92) 0%, transparent 100%);
+  padding: 3.5rem 16px 18px;
+  background: linear-gradient(to top, rgba(8,4,2,0.94) 0%, rgba(8,4,2,0.3) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   z-index: 10;
   pointer-events: none;
 }
 .reel-title {
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 1.4rem;
   font-style: italic;
-  color: rgba(253,246,236,0.90);
+  color: rgba(253,246,236,0.92);
   line-height: 1.3;
   display: block;
 }
 .reel-cta {
   font-size: 9px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(196,98,45,0.80);
+  color: rgba(196,98,45,0.85);
   cursor: pointer;
   pointer-events: all;
   transition: color 0.2s;
@@ -322,7 +326,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 body.reel-visible #exhibition .page-header,
 body.reel-visible #exhibition .filter-bar,
 body.reel-visible #exhibition .exhibition-layout {
-  padding-right: calc(260px + 1.5rem);
+  padding-right: calc(455px + 1.5rem);
 }
 
 /* Hide strip completely on tablet and mobile */
@@ -1228,7 +1232,7 @@ const REEL_CLIPS = [
   { src: 'reel-6.mp4', title: 'Chaos and the Calm' },
   { src: 'reel-7.mp4', title: 'Shades n\u2019 Silhouettes' },
 ];
-const REEL_MAX_DURATION = 6000;
+const REEL_MAX_DURATION = 9999000; // effectively unlimited — play each clip fully
 
 let reelIdx = 0;
 let reelActive = 'a';
@@ -1300,7 +1304,7 @@ function reelAdvance() {
 
       reelAdvancing = false;
       reelWatchClip();
-    }, 650);
+    }, 1500);
   };
 
   next.addEventListener('canplay', doSwap, { once: true });
@@ -1316,29 +1320,26 @@ function reelWatchClip() {
   const vid = reelCurrent();
   let fired = false;
 
-  const threshold = Math.min(
-    isFinite(vid.duration) ? vid.duration - 0.25 : 999,
-    REEL_MAX_DURATION / 1000
-  );
-
-  const onTime = () => {
-    if (!fired && vid.currentTime >= threshold) {
+  // Play to natural end — advance when video ends
+  const onEnded = () => {
+    if (!fired) {
       fired = true;
-      vid.removeEventListener('timeupdate', onTime);
+      vid.removeEventListener('ended', onEnded);
       reelAdvance();
     }
   };
+  vid.addEventListener('ended', onEnded);
 
-  vid.addEventListener('timeupdate', onTime);
-
-  // Hard cap fallback via setTimeout
-  setTimeout(() => {
-    if (!fired) {
+  // Fallback: also watch timeupdate for clips that loop or don't fire 'ended'
+  const onTime = () => {
+    if (!fired && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration - 0.3) {
       fired = true;
       vid.removeEventListener('timeupdate', onTime);
+      vid.removeEventListener('ended', onEnded);
       reelAdvance();
     }
-  }, REEL_MAX_DURATION + 200);
+  };
+  vid.addEventListener('timeupdate', onTime);
 }
 
 function reelInit() {
@@ -1383,6 +1384,15 @@ function reelInit() {
       if (!reelAdvancing) reelAdvance();
     });
   });
+
+  // Isolate the strip from scroll events — prevent gallery scroll from
+  // bubbling up and triggering browser intersection-based pause on videos
+  reelStrip.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
+  reelStrip.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
+
+  // Prevent hover/mousemove reaching the video elements
+  reelStrip.addEventListener('mouseenter', e => e.stopPropagation());
+  reelStrip.addEventListener('mousemove', e => e.stopPropagation());
 }
 
 function reelShow() {
