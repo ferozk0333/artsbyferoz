@@ -214,7 +214,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .review-card:hover { background: var(--bg-warm); }
 .review-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.75rem; font-weight: 500; }
 .review-quote { font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--ink); line-height: 1.7; margin-bottom: 1.5rem; font-weight: 300; }
-.review-quote::before { content: '"'; font-size: 2.5rem; color: var(--gold); line-height: 0; vertical-align: -0.4em; margin-right: 0.15em; font-family: var(--serif); }
+.review-quote::before { content: '\201C'; font-size: 2.5rem; color: var(--gold); line-height: 0; vertical-align: -0.4em; margin-right: 0.15em; font-family: var(--serif); }
 .review-name { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); font-weight: 500; }
 
 /* ======================== CONTACT ======================== */
@@ -240,6 +240,100 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 .form-success { padding: 2rem 0; display: none; }
 .form-success-text { font-family: var(--serif); font-size: 1.3rem; font-style: italic; color: var(--cream-dim); }
 .form-success-sub { font-size: 12px; color: var(--cream-dim); opacity: 0.6; margin-top: 0.5rem; }
+
+/* ── REEL STRIP ── */
+#reel-strip {
+  display: none;
+  position: fixed;
+  top: 60px; right: 0; bottom: 0;
+  width: 260px;
+  z-index: 50;
+  background: #0e0805;
+  border-left: 1px solid rgba(46,31,15,0.18);
+  flex-direction: column;
+  overflow: hidden;
+}
+#reel-strip.reel-on { display: flex; }
+
+.reel-hdr {
+  padding: 9px 12px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.reel-eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(196,98,45,0.75);
+  font-family: var(--sans);
+}
+
+.reel-stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+#reel-a, #reel-b {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease-in-out;
+}
+#reel-a { opacity: 1; z-index: 2; }
+#reel-b { opacity: 0; z-index: 1; }
+#reel-a.fading { opacity: 0; }
+#reel-b.active  { opacity: 1; z-index: 3; }
+
+.reel-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2.5rem 12px 14px;
+  background: linear-gradient(to top, rgba(8,4,2,0.92) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+  pointer-events: none;
+}
+.reel-title {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(253,246,236,0.90);
+  line-height: 1.3;
+  display: block;
+}
+.reel-cta {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(196,98,45,0.80);
+  cursor: pointer;
+  pointer-events: all;
+  transition: color 0.2s;
+  font-family: var(--sans);
+}
+.reel-cta:hover { color: rgba(196,98,45,1); }
+
+/* Push exhibition content left when strip is visible */
+body.reel-visible #exhibition .page-header,
+body.reel-visible #exhibition .filter-bar,
+body.reel-visible #exhibition .exhibition-layout {
+  padding-right: calc(260px + 1.5rem);
+}
+
+/* Hide strip completely on tablet and mobile */
+@media (max-width: 900px) {
+  #reel-strip { display: none !important; }
+  body.reel-visible #exhibition .page-header,
+  body.reel-visible #exhibition .filter-bar,
+  body.reel-visible #exhibition .exhibition-layout {
+    padding-right: 2.5rem;
+  }
+}
 
 /* ======================== RESPONSIVE — TABLET ======================== */
 @media (max-width: 900px) {
@@ -297,9 +391,9 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   .dedication { padding: 1rem 1.25rem 0; }
 
   /* HERO CARDS SECTION */
-.hero-cards-section { padding: 2.5rem 2.5rem 0; max-width: 900px; margin: 0 auto; width: 100%; }
+  .hero-cards-section { padding: 2.5rem 2.5rem 0; max-width: 900px; margin: 0 auto; width: 100%; }
 
-/* HOME CAROUSEL */
+  /* HOME CAROUSEL */
   .home-carousel-outer { padding: 2rem 0 0; }
   .home-carousel-wrap { padding: 1.5rem 0; }
   .carousel-item { width: 180px; }
@@ -375,6 +469,21 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 </style>
 </head>
 <body>
+
+<!-- REEL STRIP — inserted before nav as specified -->
+<div id="reel-strip">
+  <div class="reel-hdr">
+    <span class="reel-eyebrow">From the Studio</span>
+  </div>
+  <div class="reel-stage">
+    <video id="reel-a" muted playsinline preload="auto"></video>
+    <video id="reel-b" muted playsinline preload="auto"></video>
+    <div class="reel-overlay">
+      <span class="reel-title" id="reel-title"></span>
+      <span class="reel-cta" id="reel-cta">Watch full film →</span>
+    </div>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Feroz Khan</div>
@@ -454,7 +563,7 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   <div class="page-header" style="padding-bottom:1.5rem">
     <span class="eyebrow">Original Works</span>
     <h1 class="page-title">The Exhibition</h1>
-    <p class="page-subtitle">Hover to explore &middot; Click for a closer look</p>
+    <p class="page-subtitle">Hover to explore &middot; Click for a closer look &middot; Studio reel playing live on the right</p>
   </div>
   <div class="filter-bar">
     <button class="filter-pill active" data-filter="all" onclick="filterGallery('all', this)">All Works</button>
@@ -913,7 +1022,7 @@ if (excGrid) exclusiveSeries.forEach(s => {
 
   const hint = document.createElement('span');
   hint.className = 'exclusive-card-hint';
-  hint.textContent = (s.essay ? 'Watch film and read artist note' : 'Watch film') + ' →';
+  hint.textContent = (s.essay ? 'Watch film and read artist note' : 'Watch film') + ' \u2192';
 
   body.appendChild(num);
   body.appendChild(title);
@@ -931,6 +1040,14 @@ function showPage(id) {
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === id));
   window.scrollTo(0, 0);
+
+  /* ── REEL: show on exhibition (desktop only), hide otherwise ── */
+  const isDesktop = window.innerWidth > 900;
+  if (id === 'exhibition' && isDesktop) {
+    reelShow();
+  } else {
+    reelHide();
+  }
 }
 
 /* ─── FILTER ─── */
@@ -1027,7 +1144,6 @@ document.addEventListener('keydown', e => {
   if (document.getElementById('essay-modal').classList.contains('open') && e.key === 'Escape') closeEssay();
 });
 document.getElementById('lightbox').addEventListener('click', function(e) {
-  // Close if clicking the overlay background, not the inner content
   if (e.target === this) closeLightbox();
 });
 document.querySelector('.lightbox-inner').addEventListener('click', function(e) {
@@ -1047,11 +1163,9 @@ document.getElementById('essay-modal').addEventListener('click', function(e) { i
   document.getElementById('lightbox').addEventListener('touchend', e => {
     const dx = e.changedTouches[0].screenX - touchStartX;
     const dy = e.changedTouches[0].screenY - touchStartY;
-    // Vertical swipe (up or down) to close
     if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx) * 1.5) {
       closeLightbox(); return;
     }
-    // Horizontal swipe to navigate
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       if (dx < 0) lbNav(1);
       else lbNav(-1);
@@ -1102,6 +1216,190 @@ function submitForm() {
     btn.disabled = false;
     alert('Could not send. Please email ferozk0333@gmail.com directly.');
   });
+}
+
+/* ── REEL STRIP ENGINE ── */
+const REEL_CLIPS = [
+  { src: 'reel-1.mp4', title: 'Euphoria' },
+  { src: 'reel-2.mp4', title: 'Nirvana' },
+  { src: 'reel-3.mp4', title: 'Eternity' },
+  { src: 'reel-4.mp4', title: 'An Epiphany' },
+  { src: 'reel-5.mp4', title: 'The Masterpiece' },
+  { src: 'reel-6.mp4', title: 'Chaos and the Calm' },
+  { src: 'reel-7.mp4', title: 'Shades n\u2019 Silhouettes' },
+];
+const REEL_MAX_DURATION = 6000;
+
+let reelIdx = 0;
+let reelActive = 'a';
+let reelAdvancing = false;
+let reelInited = false;
+
+const reelStrip   = document.getElementById('reel-strip');
+const reelVidA    = document.getElementById('reel-a');
+const reelVidB    = document.getElementById('reel-b');
+const reelTitleEl = document.getElementById('reel-title');
+const reelCtaEl   = document.getElementById('reel-cta');
+
+function reelCurrent() { return reelActive === 'a' ? reelVidA : reelVidB; }
+function reelNext()    { return reelActive === 'a' ? reelVidB : reelVidA; }
+
+const REEL_WORDS = [
+  'Reverie', 'Solitude', 'Luminance', 'Alchemy', 'Chiaroscuro',
+  'Ephemeral', 'Confluence', 'Quietude', 'Resonance', 'Liminal',
+  'Penumbra', 'Catharsis', 'Wanderlust', 'Serenity', 'Incandescence',
+  'Threshold', 'Visceral', 'Elegy', 'Sublime', 'Transcendence',
+  'Dusk', 'Verdure', 'Melancholia', 'Radiance', 'Introspection'
+];
+let reelLastWordIdx = -1;
+
+function reelSetTitle() {
+  let idx;
+  do { idx = Math.floor(Math.random() * REEL_WORDS.length); } while (idx === reelLastWordIdx);
+  reelLastWordIdx = idx;
+  reelTitleEl.textContent = REEL_WORDS[idx];
+}
+
+function reelAdvance() {
+  if (reelAdvancing) return;
+  reelAdvancing = true;
+
+  const nextIdx = (reelIdx + 1) % REEL_CLIPS.length;
+  const curr = reelCurrent();
+  const next = reelNext();
+
+  next.src = REEL_CLIPS[nextIdx].src;
+  next.load();
+
+  const doSwap = () => {
+    reelIdx = nextIdx;
+    reelSetTitle();
+
+    if (reelActive === 'a') {
+      reelVidA.classList.add('fading');
+      reelVidB.classList.add('active');
+    } else {
+      reelVidB.classList.add('fading');
+      reelVidA.classList.add('active');
+    }
+
+    setTimeout(() => {
+      curr.pause();
+      curr.currentTime = 0;
+      curr.removeAttribute('src');
+
+      if (reelActive === 'a') {
+        reelVidA.classList.remove('fading');
+        reelVidB.classList.remove('active');
+        reelActive = 'b';
+      } else {
+        reelVidB.classList.remove('fading');
+        reelVidA.classList.remove('active');
+        reelActive = 'a';
+      }
+
+      reelAdvancing = false;
+      reelWatchClip();
+    }, 650);
+  };
+
+  next.addEventListener('canplay', doSwap, { once: true });
+  next.play().catch(() => {});
+
+  // Fallback: if canplay doesn't fire within 300ms, swap anyway
+  setTimeout(() => {
+    if (reelAdvancing) doSwap();
+  }, 300);
+}
+
+function reelWatchClip() {
+  const vid = reelCurrent();
+  let fired = false;
+
+  const threshold = Math.min(
+    isFinite(vid.duration) ? vid.duration - 0.25 : 999,
+    REEL_MAX_DURATION / 1000
+  );
+
+  const onTime = () => {
+    if (!fired && vid.currentTime >= threshold) {
+      fired = true;
+      vid.removeEventListener('timeupdate', onTime);
+      reelAdvance();
+    }
+  };
+
+  vid.addEventListener('timeupdate', onTime);
+
+  // Hard cap fallback via setTimeout
+  setTimeout(() => {
+    if (!fired) {
+      fired = true;
+      vid.removeEventListener('timeupdate', onTime);
+      reelAdvance();
+    }
+  }, REEL_MAX_DURATION + 200);
+}
+
+function reelInit() {
+  reelInited = true;
+
+  reelVidA.src = REEL_CLIPS[0].src;
+  reelVidB.src = '';
+  reelSetTitle();
+
+  reelVidA.play().catch(() => {
+    // Autoplay blocked — retry on first user interaction
+    const unlock = () => {
+      reelVidA.play().catch(() => {});
+      document.removeEventListener('click', unlock);
+      document.removeEventListener('scroll', unlock);
+    };
+    document.addEventListener('click', unlock, { once: true });
+    document.addEventListener('scroll', unlock, { once: true });
+  });
+
+  reelWatchClip();
+
+  reelCtaEl.onclick = () => showPage('exclusive');
+
+  // Pause/resume on tab visibility
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      reelCurrent().pause();
+    } else if (reelStrip.classList.contains('reel-on')) {
+      reelCurrent().play().catch(() => {});
+    }
+  });
+
+  // Hide on resize to tablet
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 900) reelHide();
+  });
+
+  // Handle video load errors — skip to next clip
+  [reelVidA, reelVidB].forEach(v => {
+    v.addEventListener('error', () => {
+      if (!reelAdvancing) reelAdvance();
+    });
+  });
+}
+
+function reelShow() {
+  if (window.innerWidth <= 900) return;
+  reelStrip.classList.add('reel-on');
+  document.body.classList.add('reel-visible');
+  if (!reelInited) {
+    reelInit();
+  } else {
+    reelCurrent().play().catch(() => {});
+  }
+}
+
+function reelHide() {
+  reelStrip.classList.remove('reel-on');
+  document.body.classList.remove('reel-visible');
+  if (reelInited) reelCurrent().pause();
 }
 </script>
 </body>
