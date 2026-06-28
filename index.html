@@ -1271,12 +1271,13 @@ function reelAdvance() {
   const curr = reelCurrent();
   const next = reelNext();
 
-  // Only reload if not already preloaded by reelWatchClip
+  // src is already set and buffered from init or previous loop — just rewind and play
   const expectedSrc = REEL_CLIPS[nextIdx].src;
-  const alreadyLoaded = next.src && next.src.endsWith(expectedSrc) && next.readyState >= 2;
-  if (!alreadyLoaded) {
-    next.src = expectedSrc;
+  if (!next.src || !next.src.endsWith(expectedSrc)) {
+    next.src = expectedSrc; // first time only — after that it's already there
     next.load();
+  } else {
+    next.currentTime = 0;
   }
 
   const doSwap = () => {
@@ -1294,7 +1295,7 @@ function reelAdvance() {
     setTimeout(() => {
       curr.pause();
       curr.currentTime = 0;
-      curr.removeAttribute('src');
+      // Do NOT remove src — keep it buffered so it plays instantly when the loop comes back around
 
       if (reelActive === 'a') {
         reelVidA.classList.remove('fading');
@@ -1323,23 +1324,6 @@ function reelAdvance() {
 function reelWatchClip() {
   const vid = reelCurrent();
   let fired = false;
-  let preloaded = false;
-
-  // Preload the next clip once we're halfway through the current one
-  const onTimeForPreload = () => {
-    if (!preloaded && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration * 0.5) {
-      preloaded = true;
-      vid.removeEventListener('timeupdate', onTimeForPreload);
-      const nextIdx = (reelIdx + 1) % REEL_CLIPS.length;
-      const next = reelNext();
-      if (!next.src || next.src === window.location.href) {
-        next.src = REEL_CLIPS[nextIdx].src;
-        next.preload = 'auto';
-        next.load();
-      }
-    }
-  };
-  vid.addEventListener('timeupdate', onTimeForPreload);
 
   // Play to natural end — advance when video ends
   const onEnded = () => {
@@ -1347,7 +1331,6 @@ function reelWatchClip() {
       fired = true;
       vid.removeEventListener('ended', onEnded);
       vid.removeEventListener('timeupdate', onTime);
-      vid.removeEventListener('timeupdate', onTimeForPreload);
       reelAdvance();
     }
   };
@@ -1358,7 +1341,6 @@ function reelWatchClip() {
     if (!fired && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration - 0.3) {
       fired = true;
       vid.removeEventListener('timeupdate', onTime);
-      vid.removeEventListener('timeupdate', onTimeForPreload);
       vid.removeEventListener('ended', onEnded);
       reelAdvance();
     }
@@ -1368,6 +1350,22 @@ function reelWatchClip() {
 
 function reelInit() {
   reelInited = true;
+
+  // Preload all clips immediately into hidden <video> elements so they're
+  // fully buffered before they're needed — only 7 short clips so this is fine
+  if (!reelInit._preloadEls) {
+    reelInit._preloadEls = REEL_CLIPS.map((clip, i) => {
+      if (i === 0) return null; // reel-a handles clip 0 directly
+      const v = document.createElement('video');
+      v.src = clip.src;
+      v.preload = 'auto';
+      v.muted = true;
+      v.style.display = 'none';
+      v.load();
+      document.body.appendChild(v);
+      return v;
+    });
+  }
 
   reelVidA.src = REEL_CLIPS[0].src;
   reelVidA.preload = 'auto';
@@ -1437,12 +1435,18 @@ function reelHide() {
   if (reelInited) reelCurrent().pause();
 }
 
-// Pre-buffer clip 0 on page load (desktop only) so it's ready the moment
-// the user clicks Exhibition — doesn't autoplay, just fetches bytes quietly
+// Preload ALL clips on page load (desktop only) so they're fully buffered
+// before the user even clicks Exhibition. Only 7 short files — worth it.
 if (window.innerWidth > 900) {
-  reelVidA.src = REEL_CLIPS[0].src;
-  reelVidA.preload = 'auto';
-  reelVidA.load();
+  REEL_CLIPS.forEach(clip => {
+    const v = document.createElement('video');
+    v.src = clip.src;
+    v.preload = 'auto';
+    v.muted = true;
+    v.style.display = 'none';
+    v.load();
+    document.body.appendChild(v);
+  });
 }
 </script>
 </body>
