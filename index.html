@@ -1222,30 +1222,15 @@ function submitForm() {
 }
 
 /* ── REEL STRIP ENGINE ── */
-const REEL_CLIPS = [
-  { src: 'images/reel-1.mp4', title: 'Euphoria' },
-  { src: 'images/reel-2.mp4', title: 'Nirvana' },
-  { src: 'images/reel-3.mp4', title: 'Eternity' },
-  { src: 'images/reel-4.mp4', title: 'An Epiphany' },
-  { src: 'images/reel-5.mp4', title: 'The Masterpiece' },
-  { src: 'images/reel-6.mp4', title: 'Chaos and the Calm' },
-  { src: 'images/reel-7.mp4', title: 'Shades n\u2019 Silhouettes' },
+const REEL_SRCS = [
+  'images/reel-1.mp4',
+  'images/reel-2.mp4',
+  'images/reel-3.mp4',
+  'images/reel-4.mp4',
+  'images/reel-5.mp4',
+  'images/reel-6.mp4',
+  'images/reel-7.mp4',
 ];
-const REEL_MAX_DURATION = 9999000; // effectively unlimited — play each clip fully
-
-let reelIdx = 0;
-let reelActive = 'a';
-let reelAdvancing = false;
-let reelInited = false;
-
-const reelStrip   = document.getElementById('reel-strip');
-const reelVidA    = document.getElementById('reel-a');
-const reelVidB    = document.getElementById('reel-b');
-const reelTitleEl = document.getElementById('reel-title');
-const reelCtaEl   = document.getElementById('reel-cta');
-
-function reelCurrent() { return reelActive === 'a' ? reelVidA : reelVidB; }
-function reelNext()    { return reelActive === 'a' ? reelVidB : reelVidA; }
 
 const REEL_WORDS = [
   'Reverie', 'Solitude', 'Luminance', 'Alchemy', 'Chiaroscuro',
@@ -1254,128 +1239,81 @@ const REEL_WORDS = [
   'Threshold', 'Visceral', 'Elegy', 'Sublime', 'Transcendence',
   'Dusk', 'Verdure', 'Melancholia', 'Radiance', 'Introspection'
 ];
-let reelLastWordIdx = -1;
 
-function reelSetTitle() {
-  let idx;
-  do { idx = Math.floor(Math.random() * REEL_WORDS.length); } while (idx === reelLastWordIdx);
-  reelLastWordIdx = idx;
-  reelTitleEl.textContent = REEL_WORDS[idx];
+const reelStrip   = document.getElementById('reel-strip');
+const reelTitleEl = document.getElementById('reel-title');
+const reelCtaEl   = document.getElementById('reel-cta');
+
+// Remove the two placeholder video elements from HTML — we manage our own
+document.getElementById('reel-a').remove();
+document.getElementById('reel-b').remove();
+
+let reelInited = false;
+let reelCur = 0;        // index of currently playing video
+let reelLastWord = -1;
+let reelVids = [];      // all 7 video elements, always in memory
+
+function reelPickWord() {
+  let i;
+  do { i = Math.floor(Math.random() * REEL_WORDS.length); } while (i === reelLastWord);
+  reelLastWord = i;
+  reelTitleEl.textContent = REEL_WORDS[i];
 }
 
-function reelAdvance() {
-  if (reelAdvancing) return;
-  reelAdvancing = true;
-
-  const nextIdx = (reelIdx + 1) % REEL_CLIPS.length;
-  const curr = reelCurrent();
-  const next = reelNext();
-
-  // src is already set and buffered from init or previous loop — just rewind and play
-  const expectedSrc = REEL_CLIPS[nextIdx].src;
-  if (!next.src || !next.src.endsWith(expectedSrc)) {
-    next.src = expectedSrc; // first time only — after that it's already there
-    next.load();
-  } else {
-    next.currentTime = 0;
-  }
-
-  const doSwap = () => {
-    reelIdx = nextIdx;
-    reelSetTitle();
-
-    if (reelActive === 'a') {
-      reelVidA.classList.add('fading');
-      reelVidB.classList.add('active');
+function reelPlayIdx(idx) {
+  // Hide all, show and play the target
+  reelVids.forEach((v, i) => {
+    if (i === idx) {
+      v.style.opacity = '1';
+      v.style.zIndex  = '2';
+      v.currentTime   = 0;
+      v.play().catch(() => {});
     } else {
-      reelVidB.classList.add('fading');
-      reelVidA.classList.add('active');
+      v.style.opacity = '0';
+      v.style.zIndex  = '1';
+      v.pause();
     }
-
-    setTimeout(() => {
-      curr.pause();
-      curr.currentTime = 0;
-      // Do NOT remove src — keep it buffered so it plays instantly when the loop comes back around
-
-      if (reelActive === 'a') {
-        reelVidA.classList.remove('fading');
-        reelVidB.classList.remove('active');
-        reelActive = 'b';
-      } else {
-        reelVidB.classList.remove('fading');
-        reelVidA.classList.remove('active');
-        reelActive = 'a';
-      }
-
-      reelAdvancing = false;
-      reelWatchClip();
-    }, 1500);
-  };
-
-  next.addEventListener('canplay', doSwap, { once: true });
-  next.play().catch(() => {});
-
-  // Fallback: if canplay doesn't fire within 4s (slow connection), swap anyway
-  setTimeout(() => {
-    if (reelAdvancing) doSwap();
-  }, 4000);
-}
-
-function reelWatchClip() {
-  const vid = reelCurrent();
-  let fired = false;
-
-  // Play to natural end — advance when video ends
-  const onEnded = () => {
-    if (!fired) {
-      fired = true;
-      vid.removeEventListener('ended', onEnded);
-      vid.removeEventListener('timeupdate', onTime);
-      reelAdvance();
-    }
-  };
-  vid.addEventListener('ended', onEnded);
-
-  // Fallback: timeupdate for clips that don't fire 'ended'
-  const onTime = () => {
-    if (!fired && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration - 0.3) {
-      fired = true;
-      vid.removeEventListener('timeupdate', onTime);
-      vid.removeEventListener('ended', onEnded);
-      reelAdvance();
-    }
-  };
-  vid.addEventListener('timeupdate', onTime);
+  });
+  reelCur = idx;
+  reelPickWord();
 }
 
 function reelInit() {
   reelInited = true;
+  const stage = reelStrip.querySelector('.reel-stage');
 
-  // Preload all clips immediately into hidden <video> elements so they're
-  // fully buffered before they're needed — only 7 short clips so this is fine
-  if (!reelInit._preloadEls) {
-    reelInit._preloadEls = REEL_CLIPS.map((clip, i) => {
-      if (i === 0) return null; // reel-a handles clip 0 directly
-      const v = document.createElement('video');
-      v.src = clip.src;
-      v.preload = 'auto';
-      v.muted = true;
-      v.style.display = 'none';
-      v.load();
-      document.body.appendChild(v);
-      return v;
+  // Build all 7 video elements, load them all immediately
+  reelVids = REEL_SRCS.map((src, i) => {
+    const v = document.createElement('video');
+    v.src        = src;
+    v.muted      = true;
+    v.playsinline = true;
+    v.preload    = 'auto';
+    v.style.cssText = `
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      transition: opacity 1.4s ease-in-out;
+      opacity: ${i === 0 ? '1' : '0'};
+      z-index: ${i === 0 ? '2' : '1'};
+    `;
+    // When this clip ends, crossfade to the next (looping)
+    v.addEventListener('ended', () => {
+      const next = (i + 1) % REEL_SRCS.length;
+      reelPlayIdx(next);
     });
-  }
+    stage.appendChild(v);
+    v.load();
+    return v;
+  });
 
-  reelVidA.src = REEL_CLIPS[0].src;
-  reelVidA.preload = 'auto';
-  reelVidB.src = '';
-  reelSetTitle();
-
-  reelVidA.play().catch(() => {
-    // Autoplay blocked — retry on first user interaction
+  // Start playing clip 0
+  reelPickWord();
+  reelVids[0].play().catch(() => {
+    // Autoplay blocked — unlock on first interaction
     const unlock = () => {
-      reelVidA.play().catch(() => {});
+      reelVids[reelCur].play().catch(() => {});
       document.removeEventListener('click', unlock);
       document.removeEventListener('scroll', unlock);
     };
@@ -1383,16 +1321,14 @@ function reelInit() {
     document.addEventListener('scroll', unlock, { once: true });
   });
 
-  reelWatchClip();
-
   reelCtaEl.onclick = () => showPage('exclusive');
 
   // Pause/resume on tab visibility
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
-      reelCurrent().pause();
+      reelVids[reelCur].pause();
     } else if (reelStrip.classList.contains('reel-on')) {
-      reelCurrent().play().catch(() => {});
+      reelVids[reelCur].play().catch(() => {});
     }
   });
 
@@ -1400,22 +1336,6 @@ function reelInit() {
   window.addEventListener('resize', () => {
     if (window.innerWidth <= 900) reelHide();
   });
-
-  // Handle video load errors — skip to next clip
-  [reelVidA, reelVidB].forEach(v => {
-    v.addEventListener('error', () => {
-      if (!reelAdvancing) reelAdvance();
-    });
-  });
-
-  // Isolate the strip from scroll events — prevent gallery scroll from
-  // bubbling up and triggering browser intersection-based pause on videos
-  reelStrip.addEventListener('wheel', e => e.stopPropagation(), { passive: true });
-  reelStrip.addEventListener('touchmove', e => e.stopPropagation(), { passive: true });
-
-  // Prevent hover/mousemove reaching the video elements
-  reelStrip.addEventListener('mouseenter', e => e.stopPropagation());
-  reelStrip.addEventListener('mousemove', e => e.stopPropagation());
 }
 
 function reelShow() {
@@ -1425,28 +1345,14 @@ function reelShow() {
   if (!reelInited) {
     reelInit();
   } else {
-    reelCurrent().play().catch(() => {});
+    reelVids[reelCur].play().catch(() => {});
   }
 }
 
 function reelHide() {
   reelStrip.classList.remove('reel-on');
   document.body.classList.remove('reel-visible');
-  if (reelInited) reelCurrent().pause();
-}
-
-// Preload ALL clips on page load (desktop only) so they're fully buffered
-// before the user even clicks Exhibition. Only 7 short files — worth it.
-if (window.innerWidth > 900) {
-  REEL_CLIPS.forEach(clip => {
-    const v = document.createElement('video');
-    v.src = clip.src;
-    v.preload = 'auto';
-    v.muted = true;
-    v.style.display = 'none';
-    v.load();
-    document.body.appendChild(v);
-  });
+  if (reelInited) reelVids[reelCur].pause();
 }
 </script>
 </body>
