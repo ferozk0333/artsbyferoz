@@ -1223,13 +1223,13 @@ function submitForm() {
 
 /* ── REEL STRIP ENGINE ── */
 const REEL_CLIPS = [
-  { src: 'reel-1.mp4', title: 'Euphoria' },
-  { src: 'reel-2.mp4', title: 'Nirvana' },
-  { src: 'reel-3.mp4', title: 'Eternity' },
-  { src: 'reel-4.mp4', title: 'An Epiphany' },
-  { src: 'reel-5.mp4', title: 'The Masterpiece' },
-  { src: 'reel-6.mp4', title: 'Chaos and the Calm' },
-  { src: 'reel-7.mp4', title: 'Shades n\u2019 Silhouettes' },
+  { src: 'images/reel-1.mp4', title: 'Euphoria' },
+  { src: 'images/reel-2.mp4', title: 'Nirvana' },
+  { src: 'images/reel-3.mp4', title: 'Eternity' },
+  { src: 'images/reel-4.mp4', title: 'An Epiphany' },
+  { src: 'images/reel-5.mp4', title: 'The Masterpiece' },
+  { src: 'images/reel-6.mp4', title: 'Chaos and the Calm' },
+  { src: 'images/reel-7.mp4', title: 'Shades n\u2019 Silhouettes' },
 ];
 const REEL_MAX_DURATION = 9999000; // effectively unlimited — play each clip fully
 
@@ -1442,6 +1442,14 @@ function reelHide() {
   reelStrip.classList.remove('reel-on');
   document.body.classList.remove('reel-visible');
   if (reelInited) reelCurrent().pause();
+}
+
+// Pre-buffer clip 0 on page load (desktop only) so it's ready the moment
+// the user clicks Exhibition — doesn't autoplay, just fetches bytes quietly
+if (window.innerWidth > 900) {
+  reelVidA.src = REEL_CLIPS[0].src;
+  reelVidA.preload = 'auto';
+  reelVidA.load();
 }
 </script>
 </body>
