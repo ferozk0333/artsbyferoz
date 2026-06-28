@@ -1374,13 +1374,6 @@ function reelInit() {
   reelVidB.src = '';
   reelSetTitle();
 
-  // Silently preload clip 1 into the standby buffer so first transition is seamless
-  setTimeout(() => {
-    reelVidB.src = REEL_CLIPS[1].src;
-    reelVidB.preload = 'auto';
-    reelVidB.load();
-  }, 1500);
-
   reelVidA.play().catch(() => {
     // Autoplay blocked — retry on first user interaction
     const unlock = () => {
