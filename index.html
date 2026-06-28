@@ -324,7 +324,9 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 /* Constrain exhibition content width so it stays clear of the fixed reel strip */
 body.reel-visible #exhibition .page-header,
 body.reel-visible #exhibition .filter-bar,
-body.reel-visible #exhibition .exhibition-layout {
+body.reel-visible #exhibition .exhibition-layout,
+body.reel-visible #exhibition .bridge,
+body.reel-visible #exhibition footer {
   max-width: calc(100vw - 455px - 1rem);
   margin-left: 0;
   margin-right: 0;
@@ -600,12 +602,7 @@ body.reel-visible #exhibition .exhibition-layout {
   <footer>
     <span class="footer-brand">Feroz Khan</span>
     <span class="footer-meta" id="footer-year-exhibition"></span>
-    <ul class="footer-links">
-      <li><a onclick="showPage('home')">Home</a></li>
-      <li><a onclick="showPage('exclusive')">Exclusive</a></li>
-      <li><a onclick="showPage('about')">About</a></li>
-      <li><a onclick="showPage('contact')">Contact</a></li>
-    </ul>
+    <ul class="footer-links"></ul>
   </footer>
 </div>
 
@@ -1274,8 +1271,13 @@ function reelAdvance() {
   const curr = reelCurrent();
   const next = reelNext();
 
-  next.src = REEL_CLIPS[nextIdx].src;
-  next.load();
+  // Only reload if not already preloaded by reelWatchClip
+  const expectedSrc = REEL_CLIPS[nextIdx].src;
+  const alreadyLoaded = next.src && next.src.endsWith(expectedSrc) && next.readyState >= 2;
+  if (!alreadyLoaded) {
+    next.src = expectedSrc;
+    next.load();
+  }
 
   const doSwap = () => {
     reelIdx = nextIdx;
@@ -1312,31 +1314,51 @@ function reelAdvance() {
   next.addEventListener('canplay', doSwap, { once: true });
   next.play().catch(() => {});
 
-  // Fallback: if canplay doesn't fire within 300ms, swap anyway
+  // Fallback: if canplay doesn't fire within 4s (slow connection), swap anyway
   setTimeout(() => {
     if (reelAdvancing) doSwap();
-  }, 300);
+  }, 4000);
 }
 
 function reelWatchClip() {
   const vid = reelCurrent();
   let fired = false;
+  let preloaded = false;
+
+  // Preload the next clip once we're halfway through the current one
+  const onTimeForPreload = () => {
+    if (!preloaded && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration * 0.5) {
+      preloaded = true;
+      vid.removeEventListener('timeupdate', onTimeForPreload);
+      const nextIdx = (reelIdx + 1) % REEL_CLIPS.length;
+      const next = reelNext();
+      if (!next.src || next.src === window.location.href) {
+        next.src = REEL_CLIPS[nextIdx].src;
+        next.preload = 'auto';
+        next.load();
+      }
+    }
+  };
+  vid.addEventListener('timeupdate', onTimeForPreload);
 
   // Play to natural end — advance when video ends
   const onEnded = () => {
     if (!fired) {
       fired = true;
       vid.removeEventListener('ended', onEnded);
+      vid.removeEventListener('timeupdate', onTime);
+      vid.removeEventListener('timeupdate', onTimeForPreload);
       reelAdvance();
     }
   };
   vid.addEventListener('ended', onEnded);
 
-  // Fallback: also watch timeupdate for clips that loop or don't fire 'ended'
+  // Fallback: timeupdate for clips that don't fire 'ended'
   const onTime = () => {
     if (!fired && isFinite(vid.duration) && vid.duration > 0 && vid.currentTime >= vid.duration - 0.3) {
       fired = true;
       vid.removeEventListener('timeupdate', onTime);
+      vid.removeEventListener('timeupdate', onTimeForPreload);
       vid.removeEventListener('ended', onEnded);
       reelAdvance();
     }
@@ -1348,8 +1370,16 @@ function reelInit() {
   reelInited = true;
 
   reelVidA.src = REEL_CLIPS[0].src;
+  reelVidA.preload = 'auto';
   reelVidB.src = '';
   reelSetTitle();
+
+  // Silently preload clip 1 into the standby buffer so first transition is seamless
+  setTimeout(() => {
+    reelVidB.src = REEL_CLIPS[1].src;
+    reelVidB.preload = 'auto';
+    reelVidB.load();
+  }, 1500);
 
   reelVidA.play().catch(() => {
     // Autoplay blocked — retry on first user interaction
