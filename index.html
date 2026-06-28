@@ -273,7 +273,6 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
   flex: 1;
   position: relative;
   overflow: hidden;
-  pointer-events: none; /* scroll/hover on gallery never reaches the video */
 }
 
 #reel-a, #reel-b {
@@ -322,11 +321,14 @@ footer { border-top: 1px solid var(--divider); padding: 2rem 2.5rem; display: gr
 }
 .reel-cta:hover { color: rgba(196,98,45,1); }
 
-/* Push exhibition content left when strip is visible */
+/* Constrain exhibition content width so it stays clear of the fixed reel strip */
 body.reel-visible #exhibition .page-header,
 body.reel-visible #exhibition .filter-bar,
 body.reel-visible #exhibition .exhibition-layout {
-  padding-right: calc(455px + 1.5rem);
+  max-width: calc(100vw - 455px - 1rem);
+  margin-left: 0;
+  margin-right: 0;
+  padding-right: 2.5rem;
 }
 
 /* Hide strip completely on tablet and mobile */
